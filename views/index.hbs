@@ -1,2 +1,93 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Unicorn TRIP</title>
+    <link rel="shortcut icon" href="/public/images/horn.ico" type="image/x-icon">
+</head>
+<body>
+<script>
+    let cities = [];
+</script>
+<form action="/process" method="post" id="startTHIS">
+    <label>
+        <p>Price</p>
+        <input type="number" name="price" required></label>
+    <label>
+        <p>City from</p>
+        <select name="cityFrom" id="" required>
+            {{#each cities}}
+                <option value="{{this.id}}">{{this.name}}</option>
+                <script> cities.push({id:parseInt('{{this.id}}'), name: '{{this.name}}'})</script>
+            {{/each}}
+        </select>
+    </label>
+    <label>
+        <p>City to</p>
+        <select name="cityTo" id="" required>
+            {{#each cities}}
+                <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+    <label>
+        <p>Days</p>
+        <input type="number" name="days" required></label>
+
+    </label>
+    <label>
+        <p>Attraction</p>
+        <select name="attr" id="" required>
+            {{#each categories}}
+                <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+    <label for="">
+        <p>Date</p>
+        <input type="date" name="date" required>
+    </label>
+    <input type="submit">
+</form>
+<script src="javascripts/jquery-3.2.1.min.js"></script>
+<script>
+$(function () {
+
+    <!--let cities = "{{cities}}";-->
+    console.log(cities);
+//    console.log(cities[0]);
+    $('form#startTHIS').submit(function (e) {
+        e.preventDefault();
+        let from = document.getElementById('startTHIS');
+        let price = from.price.value;
+        let cityFrom = from.cityFrom.value ;
+        let cityTo = from.cityTo.value ;
+        let days = from.days.value ;
+        let attr = from.attr.value ;
+        let date = from.date.value ;
+//        console.log(price, cityFrom, cityTo, days, attr, date);
+        $.ajax({
+            url: "/process",
+            method: "POST",
+            cache: false,
+            data: {
+                price, cityFrom,cityTo,days,attr,date
+            },
+            success: function (data) {
+                console.log(data);
+                let pos = data.search('%YES%');
+                if(pos > -1){
+                    location.href = button.getUrl();
+                }
+            }
+        });
+    });
+})
+</script>
+</body>
+</html>
+
+
+

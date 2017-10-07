@@ -11,23 +11,6 @@ var users = require('./routes/users');
 var app = express();
 
 
-var mysql      = require('mysql');
-
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'mysql13',
-    database : 'safebuysaledb'
-});
-connection.connect();
-
-connection.query('SELECT * FROM categories;', function (error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results);
-});
-
-connection.end();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
