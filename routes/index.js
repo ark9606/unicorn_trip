@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let mysql      = require('mysql');
+
 let connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -10,7 +11,7 @@ let connection = mysql.createConnection({
 connection.connect();
 
 let coef_price_Tickets = [];
-for(let i=0;i <=4; i++){
+for(let i = 0; i <= 4 ; i++){
     coef_price_Tickets.push(1/(3 + 2 * i));
 }
 console.log(coef_price_Tickets);
@@ -68,7 +69,7 @@ router.post('/process', function(req, res, next) {
             console.log(rooms);
             let attr_price = price - tickets_Price - hotel_price;
 
-            // select hostels
+            // select attrs
             connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat = ? and price <= ?", [cityTo, attr, attr_price],  function (error1, attractions, fields) {
                 if (error1) {
                     console.log( error1);
@@ -81,6 +82,27 @@ router.post('/process', function(req, res, next) {
                 }
 
                 console.log(attractions);
+                let results =  combinator([ tickets, rooms, attractions ] );
+                console.log('results');
+                for(let i = 0; i < results.length; i++){
+                    console.log(results[i]);
+                }
+                // console.dir(results, 4);
+
+                // console.log(   combinator([ [ 1, 3, 5 ], [ "a", "b"], [ 2, 4 ] ] ).join("\n"));
+
+
+
+
+
+
+                /* А это, чтобы получить все варианты авто-номеров:
+                 var digits = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ],
+                 letters = [ "A", "B", "C", "E", "H", "K", "M", "O", "P", "T", "X", "Y" ];
+                 combinator([ letters, digits, digits, digits, letters, letters ]);
+                 */
+
+
                 res.send(attractions);
             });
 
@@ -117,4 +139,15 @@ router.post('/process', function(req, res, next) {
     // });
 });
 
+function combinator(matrix){
+    return matrix.reduceRight(function(combination, x){
+        let result = [];
+        x.forEach(function(a){
+            combination.forEach(function(b){
+                result.push( [ a ].concat( b ) );
+            });
+        });
+        return result;
+    });
+}
 module.exports = router;
