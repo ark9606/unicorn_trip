@@ -30,11 +30,11 @@ router.get('/', function(req, res, next) {
 
 router.post('/process', function(req, res, next) {
     let price = parseFloat(req.body.price);
-    let cityFrom = req.body.cityFrom ;
-    let cityTo = req.body.cityTo ;
+    let cityFrom = req.body.cityFrom;
+    let cityTo = req.body.cityTo;
     let days = parseInt(req.body.days);
-    let attr = req.body.attr ;
-    let date = req.body.date ;
+    let attr = req.body.attr;
+    let date = req.body.date;
     let tickets_Price = 1/(3 + 2 * (days - 1)) * price;
     let tickets = null;
 
@@ -44,85 +44,96 @@ router.post('/process', function(req, res, next) {
 
     // select tickets
     // connection.query("SELECT * FROM unicorn.tickets where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price],  function (error, tickets, fields) {
-    connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price],  function (error, tickets, fields) {
+    connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price/2],  function (error, tickets_to, fields) {
         if (error) {
             console.log( error);
             res.send('%TICKET-ERROR%');
             return;
         }
-        if (tickets.length ===  0){
-            res.send('%NO-TICKETS%');
+        if (tickets_to.length ===  0){
+            res.send('%NO-TICKETS-TO%');
             return;
         }
-
         let hotel_price = ((price - tickets_Price) / 2) / days;
-        // select hostels
-        // connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
-        connection.query("SELECT rooms.id, hotels.name, hotels.marks, hotels.address, rooms.price FROM unicorn.rooms inner join hotels on hotels.id = rooms.id_hostel where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
-            if (error0) {
-                console.log( error0);
-                res.send('%HOTEL-ERROR%');
+        let date_back = (date + "").split('-')[0] + '-'+(date + "").split('-')[1] +'-'+ (parseInt((date + "").split('-')[2]) + days);
+        console.log(date_back);
+        connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where id_from = ? and id_to = ? and tickets.datetime >= ? and tickets.price <= ? ", [cityTo,cityFrom, date_back, tickets_Price/2],  function (error, tickets_back, fields) {
+            if (error) {
+                console.log( error);
+                res.send('%TICKET-ERROR%');
                 return;
             }
-            if (rooms.length ===  0){
-                res.send('%NO-ROOMS%');
+            if (tickets_back.length ===  0){
+                res.send('%NO-TICKETS-BACK%');
                 return;
             }
-            console.log(rooms);
-            let attr_price = price - tickets_Price - hotel_price;
-            console.log('attr price');
-            console.log(attr_price);
-            // select attrs
-            // connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
-            connection.query("SELECT attractions.id, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where id_city = ? and id_cat IN (" +attr+") and price <= ? ", [cityTo, attr_price],  function (error1, attractions, fields) {
-                if (error1) {
-                    console.log( error1);
-                    res.send('%ATTR-ERROR%');
+            // select hostels
+            // connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
+            connection.query("SELECT rooms.id, hotels.name, hotels.marks, hotels.address, rooms.price FROM unicorn.rooms inner join hotels on hotels.id = rooms.id_hostel where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
+                if (error0) {
+                    console.log( error0);
+                    res.send('%HOTEL-ERROR%');
                     return;
                 }
-                if (attractions.length ===  0){
-                    res.send('%NO-ATTR%');
+                if (rooms.length ===  0){
+                    res.send('%NO-ROOMS%');
                     return;
                 }
+                console.log(rooms);
+                let attr_price = price - tickets_Price - hotel_price;
+                console.log('attr price');
+                console.log(attr_price);
+                // select attrs
+                // connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
+                connection.query("SELECT attractions.id, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where id_city = ? and id_cat IN (" +attr+") and price <= ? ", [cityTo, attr_price],  function (error1, attractions, fields) {
+                    if (error1) {
+                        console.log( error1);
+                        res.send('%ATTR-ERROR%');
+                        return;
+                    }
+                    if (attractions.length ===  0){
+                        res.send('%NO-ATTR%');
+                        return;
+                    }
 
-                console.log('attractions');
-                console.log(attractions);
-                // let res = {tickets, rooms, attractions};
-                res.send(JSON.stringify({tickets, rooms, attractions}));
-                // let results =  combinator([ tickets, rooms, attractions ] );
-                // console.log('results');
-                // for(let i = 0; i < results.length; i++){
-                //     console.log(results[i]);
-                // }
+                    console.log('attractions');
+                    console.log(attractions);
+                    // let res = {tickets, rooms, attractions};
+                    res.send(JSON.stringify({tickets_to, tickets_back, rooms, attractions}));
+                    // let results =  combinator([ tickets, rooms, attractions ] );
+                    // console.log('results');
+                    // for(let i = 0; i < results.length; i++){
+                    //     console.log(results[i]);
+                    // }
 
-                // console.dir(results, 4);
+                    // console.dir(results, 4);
 
-                // console.log(   combinator([ [ 1, 3, 5 ], [ "a", "b"], [ 2, 4 ] ] ).join("\n"));
-
-
+                    // console.log(   combinator([ [ 1, 3, 5 ], [ "a", "b"], [ 2, 4 ] ] ).join("\n"));
 
 
 
 
-                /* А это, чтобы получить все варианты авто-номеров:
-                 var digits = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ],
-                 letters = [ "A", "B", "C", "E", "H", "K", "M", "O", "P", "T", "X", "Y" ];
-                 combinator([ letters, digits, digits, digits, letters, letters ]);
-                 */
 
 
-                // res.send(attractions);
+                    /* А это, чтобы получить все варианты авто-номеров:
+                     var digits = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ],
+                     letters = [ "A", "B", "C", "E", "H", "K", "M", "O", "P", "T", "X", "Y" ];
+                     combinator([ letters, digits, digits, digits, letters, letters ]);
+                     */
+
+
+                    // res.send(attractions);
+                });
+
+
+                // res.send(rooms);
             });
 
 
-            // res.send(rooms);
+            // res.send(results0);
         });
 
-
-        // res.send(results0);
     });
-
-
     // console.log(req.body);
 
 
