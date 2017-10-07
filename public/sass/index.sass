@@ -10,6 +10,8 @@ div.results
   width: calc(100% - 10px)
   flex-flow: column nowrap
   margin: 0 5px
+  font-family: $fnt_Futura
+  font-size: 1.2em
   div.result-item
     display: flex
     width: 100%
@@ -38,10 +40,15 @@ div.results
       justify-content: center
       align-items: center
       div.image-cont
-        flex-grow: 1
+        margin-left: 10px
+        //flex-grow: 1
         display: flex
         flex-direction: column
         align-items: center
+        //height: 100px
+        width: 140px
+
+
         div.image
           width: 140px
           height: 100px
@@ -64,17 +71,54 @@ div.results
           flex-direction: column
           text-align: center
           height: 40px
+          div.city
+            font-size: 1.3em
 
         div.middle
           flex-grow: 3
           display: flex
           align-items: center
           justify-content: center
+          margin-top: 25px
           div.line
             height: 2px
             background: red
             width: 100%
             margin-bottom: 5px
-
+  div.results-hotels
+    div.result-content
+      div.image-cont
+        div.image
+          height: 140px
+          width: 140px
+          background: white
+      div.info-cont
+        flex-direction: column
+        justify-content: center
+        span
+          margin: 5px
+  div.results-attrs
+    width: 100%
+    background: blueviolet
+    min-height: 200px
+    form#attrForm
+      min-height: 200px
+      display: flex
+      align-items: center
+      justify-content: center
+      align-content: center
+      flex-wrap: wrap
+      label
+        display: block
+        height: 20px
+        width: 100px
+        margin: 5px
+        //align-items: center
+        input
+          display: none
+        span
+          display: block
+          text-align: center
+          //margin: 0 auto
 
 
