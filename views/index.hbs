@@ -77,10 +77,8 @@ $(function () {
             },
             success: function (data) {
                 console.log(data);
-                let pos = data.search('%YES%');
-                if(pos > -1){
-                    location.href = button.getUrl();
-                }
+                //TODO сделать вывод результата
+
             }
         });
     });
