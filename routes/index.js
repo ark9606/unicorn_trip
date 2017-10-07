@@ -68,9 +68,10 @@ router.post('/process', function(req, res, next) {
             }
             console.log(rooms);
             let attr_price = price - tickets_Price - hotel_price;
-
+            console.log('attr price');
+            console.log(attr_price);
             // select attrs
-            connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat = ? and price <= ?", [cityTo, attr, attr_price],  function (error1, attractions, fields) {
+            connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
                 if (error1) {
                     console.log( error1);
                     res.send('%ATTR-ERROR%');
@@ -81,12 +82,16 @@ router.post('/process', function(req, res, next) {
                     return;
                 }
 
+                console.log('attractions');
                 console.log(attractions);
-                let results =  combinator([ tickets, rooms, attractions ] );
-                console.log('results');
-                for(let i = 0; i < results.length; i++){
-                    console.log(results[i]);
-                }
+                // let res = {tickets, rooms, attractions};
+                res.send(JSON.stringify({tickets, rooms, attractions}));
+                // let results =  combinator([ tickets, rooms, attractions ] );
+                // console.log('results');
+                // for(let i = 0; i < results.length; i++){
+                //     console.log(results[i]);
+                // }
+
                 // console.dir(results, 4);
 
                 // console.log(   combinator([ [ 1, 3, 5 ], [ "a", "b"], [ 2, 4 ] ] ).join("\n"));
@@ -103,7 +108,7 @@ router.post('/process', function(req, res, next) {
                  */
 
 
-                res.send(attractions);
+                // res.send(attractions);
             });
 
 
