@@ -18,9 +18,18 @@
       <file leaf-file-name="index.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="484">
+              <caret line="256" column="53" lean-forward="false" selection-start-line="256" selection-start-column="53" selection-end-line="256" selection-end-column="53" />
+              <folding>
+                <marker date="1507410962713" expanded="true" signature="8381:9120" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8471:8553" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8471:9053" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8627:9038" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8667:8741" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8783:8847" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8783:8904" ph="..." />
+                <marker date="1507410962713" expanded="true" signature="8944:9018" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,8 +70,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+            <state relative-caret-position="255">
+              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -71,8 +80,8 @@
       <file leaf-file-name="index.sass" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/sass/index.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+            <state relative-caret-position="323">
+              <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -282,6 +291,11 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\unicorn\unicorn_trip\public\sass" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -366,12 +380,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1507379074133</updated>
-      <workItem from="1507379077463" duration="25922000" />
+      <workItem from="1507379077463" duration="28147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25922000" />
+    <option name="totallyTimeSpent" value="28147000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -458,14 +472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -474,27 +480,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/sass/index-copy.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+        <state relative-caret-position="255">
+          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/sass/index.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="40" column="25" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+        <state relative-caret-position="323">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="484">
+          <caret line="256" column="53" lean-forward="false" selection-start-line="256" selection-start-column="53" selection-end-line="256" selection-end-column="53" />
+          <folding>
+            <marker date="1507410962713" expanded="true" signature="8381:9120" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8471:8553" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8471:9053" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8627:9038" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8667:8741" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8783:8847" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8783:8904" ph="..." />
+            <marker date="1507410962713" expanded="true" signature="8944:9018" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

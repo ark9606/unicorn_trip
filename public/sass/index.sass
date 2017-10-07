@@ -6,7 +6,7 @@ body
   background:  red
 
 div.results
-  display: none
+  display: flex
   width: calc(100% - 10px)
   flex-flow: column nowrap
   margin: 0 5px
@@ -18,87 +18,95 @@ div.results
     background: gray
     height: 200px
     justify-content: space-between
-    div.result-content
+    overflow: hidden
+    div.result-slide
+      flex-basis: 100%
+      min-width: 100%
       height: 100%
-      background: blue
-      align-items: center
-      justify-content: center
-      width: calc(100% - 40px)
-    div.switch
-      height: 100%
-      width: 20px
-      background-color: yellow
-      cursor: pointer
-      background: url('/images/arrow.png') center center no-repeat
-      background-size: 40px
-      &.switch-left
-        background-image: url("/images/arrow-left.png")
-      &:hover
-        background-color: white
-    div.result-content
       display: flex
-      justify-content: center
       align-items: center
-      div.image-cont
-        margin-left: 10px
-        //flex-grow: 1
-        display: flex
-        flex-direction: column
+      justify-content: center
+      div.result-content
+        height: 100%
+        background: blue
         align-items: center
-        //height: 100px
-        width: 140px
-
-
-        div.image
-          width: 140px
-          height: 100px
+        justify-content: center
+        width: calc(100% - 40px)
+      div.switch
+        height: 100%
+        width: 20px
+        background-color: yellow
+        cursor: pointer
+        background: url('/images/arrow.png') center center no-repeat
+        background-size: 40px
+        &.switch-left
+          background-image: url("/images/arrow-left.png")
+        &:hover
           background-color: white
-        div.price
-          font: 100 1em $fnt_Futura
-          color: white
-      div.info-cont
-        flex-grow: 8
+      div.result-content
         display: flex
-
-        margin: 10px
-        background: green
-        height: calc(100% - 20px)
-        justify-content: space-between
+        justify-content: center
         align-items: center
-        div.item
-          flex-grow: 1
+        div.image-cont
+          margin-left: 10px
+          //flex-grow: 1
           display: flex
           flex-direction: column
-          text-align: center
-          height: 40px
-          div.city
-            font-size: 1.3em
-
-        div.middle
-          flex-grow: 3
-          display: flex
           align-items: center
-          justify-content: center
-          margin-top: 25px
-          div.line
-            height: 2px
-            background: red
-            width: 100%
-            margin-bottom: 5px
-  div.results-hotels
-    div.result-content
-      div.image-cont
-        div.image
-          height: 140px
+          //height: 100px
           width: 140px
-          background: white
-      div.info-cont
-        flex-direction: column
-        justify-content: center
-        span
-          margin: 5px
-          &.name
-            font-size: 1.3em
+
+
+          div.image
+            width: 140px
+            height: 100px
+            background-color: white
+          div.price
+            font: 100 1em $fnt_Futura
+            color: white
+        div.info-cont
+          flex-grow: 8
+          display: flex
+
+          margin: 10px
+          background: green
+          height: calc(100% - 20px)
+          justify-content: space-between
+          align-items: center
+          div.item
+            flex-grow: 1
+            display: flex
+            flex-direction: column
+            text-align: center
+            height: 40px
+            div.city
+              font-size: 1.3em
+          div.middle
+            flex-grow: 3
+            display: flex
+            align-items: center
+            justify-content: center
+            margin-top: 25px
+            div.line
+              height: 2px
+              background: red
+              width: 100%
+              margin-bottom: 5px
+  div.results-hotels
+    div.result-slide
+      div.result-content
+        div.image-cont
+          div.image
+            height: 140px
+            width: 140px
+            background: white
+        div.info-cont
+          flex-direction: column
+          justify-content: center
+          span
+            margin: 5px
+            &.name
+              font-size: 1.3em
   div.results-attrs
     width: 100%
     background: blueviolet
