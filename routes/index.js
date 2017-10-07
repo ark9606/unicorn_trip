@@ -39,23 +39,53 @@ router.post('/process', function(req, res, next) {
 
     // поиск подходящих билетов
     console.log(tickets_Price);
+    //TODO если город родной - то только развалечения ищем
 
     // select tickets
     connection.query("SELECT * FROM unicorn.tickets where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price],  function (error, tickets, fields) {
         if (error) {
-            console.log( error); return;
+            console.log( error);
+            res.send('%TICKET-ERROR%');
+            return;
         }
-        
+        if (tickets.length ===  0){
+            res.send('%NO-TICKETS%');
+            return;
+        }
+
         let hotel_price = ((price - tickets_Price) / 2) / days;
         // select hostels
         connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
             if (error0) {
-                console.log( error0); return;
+                console.log( error0);
+                res.send('%HOTEL-ERROR%');
+                return;
+            }
+            if (rooms.length ===  0){
+                res.send('%NO-ROOMS%');
+                return;
             }
             console.log(rooms);
+            let attr_price = price - tickets_Price - hotel_price;
+
+            // select hostels
+            connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat = ? and price <= ?", [cityTo, attr, attr_price],  function (error1, attractions, fields) {
+                if (error1) {
+                    console.log( error1);
+                    res.send('%ATTR-ERROR%');
+                    return;
+                }
+                if (attractions.length ===  0){
+                    res.send('%NO-ATTR%');
+                    return;
+                }
+
+                console.log(attractions);
+                res.send(attractions);
+            });
 
 
-            res.send(rooms);
+            // res.send(rooms);
         });
 
 
