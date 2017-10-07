@@ -280,11 +280,15 @@ $(function () {
 
                     $('div.switch').click(function (e) {
                         // hide this block
-                        $(this).parent().parent().children().css('display', 'none');
-                        console.log($(this).parent().parent().children());
+//                        $(this).parent().parent().children().css('display', 'none');
+                        let mar = $(this).parent().parent().children().eq(0).css('margin-left');
+                        alert(mar);
+                        $(this).parent().parent().children().eq(0).animate({marginLeft: 'calc( ' + mar +' - 50% )'}, 250);
+//                        $(this).parent().parent().children().eq(0).css('margin-left', 'calc( ' + mar +' - 50% )');
+                        console.log($(this).parent().parent().children().eq(0));
 
                         // and show all
-                        $(this).parent().css('display', 'flex');
+//                        $(this).parent().css('display', 'flex');
 
 
                         $('div#total-price').text(calcPrice() + '$');
