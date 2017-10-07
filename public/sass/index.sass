@@ -6,7 +6,7 @@ body
   background:  red
 
 div.results
-  display: flex
+  display: none
   width: calc(100% - 10px)
   flex-flow: column nowrap
   margin: 0 5px
@@ -29,10 +29,10 @@ div.results
       width: 20px
       background-color: yellow
       cursor: pointer
-      background: url('/public/images/arrow.png') center center no-repeat
+      background: url('/images/arrow.png') center center no-repeat
       background-size: 40px
       &.switch-left
-        background-image: url("/public/images/arrow-left.png")
+        background-image: url("/images/arrow-left.png")
       &:hover
         background-color: white
     div.result-content
@@ -97,6 +97,8 @@ div.results
         justify-content: center
         span
           margin: 5px
+          &.name
+            font-size: 1.3em
   div.results-attrs
     width: 100%
     background: blueviolet
@@ -108,11 +110,13 @@ div.results
       justify-content: center
       align-content: center
       flex-wrap: wrap
+      max-width: 60%
+      margin: 0 auto
       label
         display: block
         height: 20px
         width: 100px
-        margin: 5px
+        margin: 10px 5px
         //align-items: center
         input
           display: none

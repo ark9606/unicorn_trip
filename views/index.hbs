@@ -6,19 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Unicorn TRIP</title>
     <link rel="shortcut icon" href="/public/images/horn.ico" type="image/x-icon">
-    <link rel="stylesheet" href="public/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
 </head>
 <body>
 <script>
     let cities = [];
 </script>
+<header>Unicorn</header>
 <form action="/process" method="post" id="startTHIS">
     <label>
-        <p>Price</p>
-        <input type="number" name="price" required></label>
+
+        <input type="number" name="price" required step="0.01" placeholder="Price" min="5"></label>
     <label>
-        <p>City from</p>
         <select name="cityFrom" id="" required>
+            <option value="" selected="selected" disabled>Origin</option>
             {{#each cities}}
                 <option value="{{this.id}}">{{this.name}}</option>
                 <script> cities.push({id:parseInt('{{this.id}}'), name: '{{this.name}}'})</script>
@@ -26,16 +27,16 @@
         </select>
     </label>
     <label>
-        <p>City to</p>
         <select name="cityTo" id="" required>
+            <option value="" selected="selected" disabled>Destination</option>
+
             {{#each cities}}
                 <option value="{{this.id}}">{{this.name}}</option>
             {{/each}}
         </select>
     </label>
     <label>
-        <p>Days</p>
-        <input type="number" name="days" required></label>
+        <input type="number" name="days" required min="1" placeholder="Days"></label>
 
     </label>
     <label>
@@ -62,17 +63,116 @@
     </label>
     <input type="submit">
 </form>
+<!--<div class="results">-->
+    <!--<div class="results-tickets result-item">-->
+        <!--<div class="switch switch-left"></div>-->
+        <!--<div class="result-content"></div>-->
+        <!--<div class="switch switch-right"></div>-->
+    <!--</div>-->
+    <!--<div class="results-hotels result-item">-->
+
+    <!--</div>-->
+    <!--<div class="results-attrs result-item">-->
+
+    <!--</div>-->
+<!--</div>-->
+
 <div class="results">
-    <div class="results-tickets result-item">
+    <div class="results-tickets result-item results-ticket-to">
         <div class="switch switch-left"></div>
-        <div class="result-content"></div>
+        <div class="result-content">
+            <div class="image-cont"><div class="image"></div><div class="price">120$</div></div>
+            <div class="info-cont">
+                <div class="part item">
+                    <div class="city">City 1</div>
+                </div>
+                <DIV class="middle item">
+                    <div class="line"></div><div class="date">17.09.2017 17:00</div>
+                </DIV>
+                <div class="part item">
+                    <div class="city">City 2</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="switch switch-right"></div>
+    </div>
+    <div class="results-tickets result-item results-ticket-back">
+        <div class="switch switch-left"></div>
+        <div class="result-content">
+            <div class="image-cont"><div class="image"></div><div class="price">120$</div></div>
+            <div class="info-cont">
+                <div class="part item">
+                    <div class="city">City 1</div>
+                </div>
+                <DIV class="middle item">
+                    <div class="line"></div><div class="date">17.09.2017 17:00</div>
+                </DIV>
+                <div class="part item">
+                    <div class="city">City 2</div>
+                </div>
+
+            </div>
+        </div>
         <div class="switch switch-right"></div>
     </div>
     <div class="results-hotels result-item">
+        <div class="switch switch-left"></div>
+        <div class="result-content">
+            <div class="image-cont"><div class="image"></div><div class="price">120$</div></div>
+            <div class="info-cont">
+                <span class="name">dwddwd</span>
+                <span class="mark">5</span>
+                <span class="address">dewdf ewdf ef ewf</span>
 
+            </div>
+        </div>
+        <div class="switch switch-right"></div>
     </div>
-    <div class="results-attrs result-item">
+    <div class="results-attrs">
+        <div class="switch switch-left"></div>
+        <div class="result-content">
+            <form action="" id="attrForm">
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 1</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 2</span>
 
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 3</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 4</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 4</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 4</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 4</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 4</span>
+                </label>
+                <label for="">
+                    <input type="checkbox" class="attr-item">
+                    <span class="title">Item 4</span>
+                </label>
+            </form>
+        </div>
+        <div class="switch switch-right"></div>
     </div>
 </div>
 <script src="javascripts/jquery-3.2.1.min.js"></script>
@@ -104,9 +204,25 @@ $(function () {
             },
             success: function (data) {
                 console.log(data);
+//                if(data.indexOf('%TICKET-ERROR%') > -1 || data.indexOf('%%NO-TICKETS-TO%%') > -1 || data.indexOf('%TICKET-ERROR%') > -1 || data.indexOf('%NO-TICKETS-BACK%') > -1 ) {
+                if(data.indexOf('%') > -1 ) {
+                    console.log('no');
+                    $('div.results').css('display', 'none');
+
+                    return;
+                }
                 let obj = JSON.parse(data);
                 console.log(obj);
-                //TODO сделать вывод результата
+                if(obj.attractions.length > 0){
+                    //TODO сделать вывод результата
+                    $('div.results').css('display', 'flex');
+                    let str = ''
+                }
+                else{
+                    console.log('no');
+                    $('div.results').css('display', 'none');
+
+                }
 
 
             }
