@@ -120,75 +120,46 @@
         <!--<div class="switch switch-right" data-dir="1"></div>-->
     </div>
     <div class="results-hotels result-item">
-        <div class="switch switch-left"></div>
-        <div class="result-content">
-            <div class="image-cont"><div class="image"></div><div class="price">120$</div></div>
-            <div class="info-cont">
-                <span class="name">dwddwd</span>
-                <span class="mark">5</span>
-                <span class="address">dewdf ewdf ef ewf</span>
+        <!--<div class="switch switch-left"></div>-->
+        <!--<div class="result-content">-->
+            <!--<div class="image-cont"><div class="image"></div><div class="price">120$</div></div>-->
+            <!--<div class="info-cont">-->
+                <!--<span class="name">dwddwd</span>-->
+                <!--<span class="mark">5</span>-->
+                <!--<span class="address">dewdf ewdf ef ewf</span>-->
 
-            </div>
-        </div>
-        <div class="switch switch-right"></div>
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="switch switch-right"></div>-->
     </div>
     <div class="results-attrs">
-        <div class="switch switch-left"></div>
         <div class="result-content">
             <form action="" id="attrForm">
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 1</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 2</span>
-
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 3</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 4</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 4</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 4</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 4</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 4</span>
-                </label>
-                <label for="">
-                    <input type="checkbox" class="attr-item">
-                    <span class="title">Item 4</span>
-                </label>
             </form>
         </div>
-        <div class="switch switch-right"></div>
     </div>
+    <input type="submit" form="attrForm">
 </div>
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
-    console.log(cities);
+
+    $('form#attrForm').submit(function (e) {
+        e.preventDefault();
+        let attrs = $('form#attrForm input:checked').map(function (e) {
+            return $(this).attr('value');
+        });
+        console.log(attrs[0]);
+    });
+
+    let days = 1;
     $('form#startTHIS').submit(function (e) {
         e.preventDefault();
         let from = document.getElementById('startTHIS');
         let price = from.price.value;
         let cityFrom = from.cityFrom.value ;
         let cityTo = from.cityTo.value ;
-        let days = from.days.value ;
+        days = from.days.value ;
         let name_city_from = from.cityFrom.options[from.cityFrom.selectedIndex ].text;
         let name_city_to = from.cityTo.options[from.cityTo.selectedIndex ].text;
 
@@ -229,7 +200,7 @@ $(function () {
                         str+=`         <div class="result-slide" data-num=${i}>
                             <div class="switch switch-left" data-dir="-1"></div>
                                     <div class="result-content">
-                                        <div class="image-cont"><div class="image"></div><div class="price">${obj.tickets_to[i].price}$</div></div>
+                                        <div class="image-cont"><div class="image"></div><div class="price" id="tickets_to_price" data-price=${obj.tickets_to[i].price}>${obj.tickets_to[i].price}$</div></div>
                                         <div class="info-cont">
                                             <div class="part item">
                                                 <div class="city">${name_city_from}</div>
@@ -255,7 +226,7 @@ $(function () {
                         str+=`         <div class="result-slide" data-num=${i}>
                             <div class="switch switch-left" data-dir="-1"></div>
                                     <div class="result-content">
-                                        <div class="image-cont"><div class="image"></div><div class="price">${obj.tickets_back[i].price}$</div></div>
+                                        <div class="image-cont"><div class="image"></div><div class="price" id="tickets_from_price" data-price=${obj.tickets_back[i].price}>${obj.tickets_back[i].price}$</div></div>
                                         <div class="info-cont">
                                             <div class="part item">
                                                 <div class="city">${name_city_to}</div>
@@ -274,9 +245,34 @@ $(function () {
                     }
                     $('div.results-ticket-back').append(str);
                     str = '';
+                    for(let i=0; i< obj.rooms.length; i++){
+//                        let thisDate = obj.tickets_back[i].datetime;
+//                        thisDate = thisDate.replace('T', ' ').substr(0, thisDate.indexOf('.'));
+                        str+=`         <div class="result-slide" data-num=${i}>
+                                                        <div class="switch switch-left"></div>
+                            <div class="result-content">
+                                <div class="image-cont"><div class="image"></div><div class="price" id="hostel_price" data-price=${obj.rooms[i].price}>${obj.rooms[i].price}$</div></div>
+                                <div class="info-cont">
+                                    <span class="name">${obj.rooms[i].name}</span>
+                                    <span class="mark">оценка посетителей ${obj.rooms[i].marks}</span>
+                                    <span class="address">${obj.rooms[i].address}</span>
 
+                                </div>
+                            </div>
+                            <div class="switch switch-right"></div></div>`;
 
+                    }
+                    $('div.results-hotels').append(str);
+                    str = '';
+                    for(let i=0; i< obj.attractions.length; i++){
+                        str+=`
+                    <input type="checkbox" class="attr-item" id="attr${i}" value=${obj.attractions[i].id}>
+                <label for="attr${i}">${obj.attractions[i].name}</label>`;
 
+                    }
+                    $('form#attrForm').append(str);
+
+                    calcPrice();
 
 
                     $('div.switch').click(function (e) {
@@ -308,6 +304,13 @@ $(function () {
             }
         });
     });
+    function calcPrice() {
+        let tickets_to_price = $('div#tickets_to_price').attr('data-price');
+        let tickets_from_price = $('div#tickets_from_price').attr('data-price');
+        let hostel_price = $('div#hostel_price').attr('data-price') * days;
+
+        alert(tickets_from_price);
+    }
 
 })
 </script>
