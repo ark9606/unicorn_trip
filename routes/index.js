@@ -43,7 +43,8 @@ router.post('/process', function(req, res, next) {
     //TODO если город родной - то только развалечения ищем
 
     // select tickets
-    connection.query("SELECT * FROM unicorn.tickets where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price],  function (error, tickets, fields) {
+    // connection.query("SELECT * FROM unicorn.tickets where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price],  function (error, tickets, fields) {
+    connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where id_from = ? and id_to = ? and tickets.datetime > ? and tickets.price <= ? ", [cityFrom, cityTo, date, tickets_Price],  function (error, tickets, fields) {
         if (error) {
             console.log( error);
             res.send('%TICKET-ERROR%');
@@ -56,7 +57,8 @@ router.post('/process', function(req, res, next) {
 
         let hotel_price = ((price - tickets_Price) / 2) / days;
         // select hostels
-        connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
+        // connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
+        connection.query("SELECT rooms.id, hotels.name, hotels.marks, hotels.address, rooms.price FROM unicorn.rooms inner join hotels on hotels.id = rooms.id_hostel where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
             if (error0) {
                 console.log( error0);
                 res.send('%HOTEL-ERROR%');
@@ -71,7 +73,8 @@ router.post('/process', function(req, res, next) {
             console.log('attr price');
             console.log(attr_price);
             // select attrs
-            connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
+            // connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
+            connection.query("SELECT attractions.id, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where id_city = ? and id_cat IN (" +attr+") and price <= ? ", [cityTo, attr_price],  function (error1, attractions, fields) {
                 if (error1) {
                     console.log( error1);
                     res.send('%ATTR-ERROR%');

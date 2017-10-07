@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Unicorn TRIP</title>
     <link rel="shortcut icon" href="/public/images/horn.ico" type="image/x-icon">
+    <link rel="stylesheet" href="public/stylesheets/index.css">
 </head>
 <body>
 <script>
@@ -61,6 +62,19 @@
     </label>
     <input type="submit">
 </form>
+<div class="results">
+    <div class="results-tickets result-item">
+        <div class="switch switch-left"></div>
+        <div class="result-content"></div>
+        <div class="switch switch-right"></div>
+    </div>
+    <div class="results-hotels result-item">
+
+    </div>
+    <div class="results-attrs result-item">
+
+    </div>
+</div>
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
@@ -77,8 +91,8 @@ $(function () {
         $('form#startTHIS div#attr input:checked').each(function() {
             attr.push($(this).attr('value'));
         });
-        attr = attr.join(',');
-        alert(attr);
+//        attr = attr.join(',');
+//        alert(attr);
         let date = from.date.value ;
 //        console.log(price, cityFrom, cityTo, days, attr, date);
         $.ajax({
@@ -86,14 +100,14 @@ $(function () {
             method: "POST",
             cache: false,
             data: {
-                price, cityFrom,cityTo,days,attr,date
+                price, cityFrom,cityTo,days,attr: attr.join(','),date
             },
             success: function (data) {
                 console.log(data);
                 let obj = JSON.parse(data);
                 console.log(obj);
                 //TODO сделать вывод результата
-                
+
 
             }
         });
