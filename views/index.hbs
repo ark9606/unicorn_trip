@@ -79,6 +79,11 @@
 
 <div class="results">
     <div class="results-tickets result-item results-ticket-to">
+        <!--<div class="results-tickets-to-inner">-->
+
+        <!--</div>-->
+
+
         <!--<div class="result-slide">-->
 
         <!--<div class="switch switch-left"></div>-->
@@ -204,7 +209,7 @@ $(function () {
                         str+=`         <div class="result-slide" data-num=${i}>
                             <div class="switch switch-left" data-dir="-1"></div>
                                     <div class="result-content">
-                                        <div class="image-cont"><div class="image"></div><div class="price" id="tickets_to_price" data-price=${obj.tickets_to[i].price}>${obj.tickets_to[i].price}$</div></div>
+                                        <div class="image-cont"><div class="image"></div><div class="price" class="tickets_to_price" data-price=${obj.tickets_to[i].price}>${obj.tickets_to[i].price}$</div></div>
                                         <div class="info-cont">
                                             <div class="part item">
                                                 <div class="city">${name_city_from}</div>
@@ -230,7 +235,7 @@ $(function () {
                         str+=`         <div class="result-slide" data-num=${i}>
                             <div class="switch switch-left" data-dir="-1"></div>
                                     <div class="result-content">
-                                        <div class="image-cont"><div class="image"></div><div class="price" id="tickets_from_price" data-price=${obj.tickets_back[i].price}>${obj.tickets_back[i].price}$</div></div>
+                                        <div class="image-cont"><div class="image"></div><div class="price" class="tickets_from_price" data-price=${obj.tickets_back[i].price}>${obj.tickets_back[i].price}$</div></div>
                                         <div class="info-cont">
                                             <div class="part item">
                                                 <div class="city">${name_city_to}</div>
@@ -255,7 +260,7 @@ $(function () {
                         str+=`         <div class="result-slide" data-num=${i}>
                                                         <div class="switch switch-left"></div>
                             <div class="result-content">
-                                <div class="image-cont"><div class="image"></div><div class="price" id="hostel_price" data-price=${obj.rooms[i].price}>${obj.rooms[i].price}$</div></div>
+                                <div class="image-cont"><div class="image"></div><div class="price" class="hostel_price" data-price=${obj.rooms[i].price}>${obj.rooms[i].price}$</div></div>
                                 <div class="info-cont">
                                     <span class="name">${obj.rooms[i].name}</span>
                                     <span class="mark">оценка посетителей ${obj.rooms[i].marks}</span>
@@ -276,38 +281,26 @@ $(function () {
                     }
                     $('form#attrForm').append(str);
 
-                    $('div#total-price').text(calcPrice() + '$');
+                    $('div#total-price').text(calcPrice(0,0,0) + '$');
 
                     $('div.switch').click(function (e) {
-                        // hide this block
-//                        $(this).parent().parent().children().css('display', 'none');
+                        let dir = parseInt($(this).attr('data-dir'));
                         let mar = $(this).parent().parent().children().eq(0).css('margin-left');
-                        alert(mar);
-                        $(this).parent().parent().children().eq(0).animate({marginLeft: 'calc( ' + mar +' - 50% )'}, 250);
-//                        $(this).parent().parent().children().eq(0).css('margin-left', 'calc( ' + mar +' - 50% )');
-                        console.log($(this).parent().parent().children().eq(0));
-
-                        // and show all
-//                        $(this).parent().css('display', 'flex');
-
-
-                        $('div#total-price').text(calcPrice() + '$');
-
-//                        let dir = parseInt($(this).attr('data-dir'));
-//                        let mar = $(this).parent().css('margin-left');
-////                        let mar = $(this).parent().parent().children().first().css('margin-left');
-////                        let el = document.querySelector('div.')
-////                        let mar = $('div.result-slide')[0].css('margin-left');
-//                        alert(mar);
-//                        if(dir>0){
-//                            console.log($(this).parent());
-//                            console.log($(this).parent().parent().children().first());
-////                            $(this).parent().parent().children().first().animate({'margin-left': 'calc( ' + mar +' - 100% )'}, 250);
-//                            $(this).parent().animate({'margin-left': 'calc( ' + mar +' - 100% )'}, 250);
-//                        }
-//                        else{
-//                            $(this).parent().parent().children(0).animate({'margin-left': '100%'}, 250);
-//                        }
+                        let count = $(this).parent().parent().children().length;
+                        if(dir>0){
+                            if($(this).parent().parent().children().eq(count - 1) === $(this).parent()) {
+                                return;
+                            }
+                            $(this).parent().parent().children().eq(0).css('margin-left', 'calc( ' + mar +' - 100% )');
+//                            $(this).parent().parent().children().eq(0).animate({marginLeft: 'calc( ' + mar +' - 100% )'}, 250);
+                        }
+                        else{
+                            if($(this).parent().parent().children().eq(0) === $(this).parent()) {
+                                return;
+                            }
+                            $(this).parent().parent().children().eq(0).css('margin-left', 'calc( ' + mar +' + 100% )');
+                        }
+                        $('div#total-price').text(calcPrice(1,0,0) + '$');
                     });
                 }
                 else{
@@ -320,10 +313,10 @@ $(function () {
             }
         });
     });
-    function calcPrice() {
-        let tickets_to_price = parseFloat($('div#tickets_to_price').attr('data-price'));
-        let tickets_from_price = parseFloat($('div#tickets_from_price').attr('data-price'));
-        let hostel_price = parseFloat($('div#hostel_price').attr('data-price') * days);
+    function calcPrice(index0,index1, index2) {
+        let tickets_to_price = parseFloat($('div.tickets_to_price').eq(index0).attr('data-price'));
+        let tickets_from_price = parseFloat($('div.tickets_from_price').eq(index1).attr('data-price'));
+        let hostel_price = parseFloat($('div.hostel_price').eq(index2).attr('data-price') * days);
         let attrs_price = 0;
         if($('form#attrForm input:checked').length > 0) {
             attrs_price = $('form#attrForm input:checked').map(function (e) {
