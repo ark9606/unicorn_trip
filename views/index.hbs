@@ -138,6 +138,7 @@
             </form>
         </div>
     </div>
+    <div id="total-price"></div>
     <input type="submit" form="attrForm">
 </div>
 <script src="javascripts/jquery-3.2.1.min.js"></script>
@@ -146,10 +147,13 @@ $(function () {
 
     $('form#attrForm').submit(function (e) {
         e.preventDefault();
-        let attrs = $('form#attrForm input:checked').map(function (e) {
-            return $(this).attr('value');
-        });
-        console.log(attrs[0]);
+        $('div#total-price').text(calcPrice() + '$');
+
+//        let attrs = $('form#attrForm input:checked').map(function (e) {
+//            return $(this).attr('value');
+//        });
+//        console.log(attrs[0]);
+//        calcPrice();
     });
 
     let days = 1;
@@ -266,32 +270,40 @@ $(function () {
                     str = '';
                     for(let i=0; i< obj.attractions.length; i++){
                         str+=`
-                    <input type="checkbox" class="attr-item" id="attr${i}" value=${obj.attractions[i].id}>
+                    <input type="checkbox" class="attr-item" id="attr${i}" value=${obj.attractions[i].id} data-price=${obj.attractions[i].price}>
                 <label for="attr${i}">${obj.attractions[i].name}</label>`;
 
                     }
                     $('form#attrForm').append(str);
 
-                    calcPrice();
-
+                    $('div#total-price').text(calcPrice() + '$');
 
                     $('div.switch').click(function (e) {
+                        // hide this block
+                        $(this).parent().parent().children().css('display', 'none');
+                        console.log($(this).parent().parent().children());
 
-                        let dir = parseInt($(this).attr('data-dir'));
-                        let mar = $(this).parent().css('margin-left');
-//                        let mar = $(this).parent().parent().children().first().css('margin-left');
-//                        let el = document.querySelector('div.')
-//                        let mar = $('div.result-slide')[0].css('margin-left');
-                        alert(mar);
-                        if(dir>0){
-                            console.log($(this).parent());
-                            console.log($(this).parent().parent().children().first());
-//                            $(this).parent().parent().children().first().animate({'margin-left': 'calc( ' + mar +' - 100% )'}, 250);
-                            $(this).parent().animate({'margin-left': 'calc( ' + mar +' - 100% )'}, 250);
-                        }
-                        else{
-                            $(this).parent().parent().children(0).animate({'margin-left': '100%'}, 250);
-                        }
+                        // and show all
+                        $(this).parent().css('display', 'flex');
+
+
+                        $('div#total-price').text(calcPrice() + '$');
+
+//                        let dir = parseInt($(this).attr('data-dir'));
+//                        let mar = $(this).parent().css('margin-left');
+////                        let mar = $(this).parent().parent().children().first().css('margin-left');
+////                        let el = document.querySelector('div.')
+////                        let mar = $('div.result-slide')[0].css('margin-left');
+//                        alert(mar);
+//                        if(dir>0){
+//                            console.log($(this).parent());
+//                            console.log($(this).parent().parent().children().first());
+////                            $(this).parent().parent().children().first().animate({'margin-left': 'calc( ' + mar +' - 100% )'}, 250);
+//                            $(this).parent().animate({'margin-left': 'calc( ' + mar +' - 100% )'}, 250);
+//                        }
+//                        else{
+//                            $(this).parent().parent().children(0).animate({'margin-left': '100%'}, 250);
+//                        }
                     });
                 }
                 else{
@@ -305,11 +317,22 @@ $(function () {
         });
     });
     function calcPrice() {
-        let tickets_to_price = $('div#tickets_to_price').attr('data-price');
-        let tickets_from_price = $('div#tickets_from_price').attr('data-price');
-        let hostel_price = $('div#hostel_price').attr('data-price') * days;
-
-        alert(tickets_from_price);
+        let tickets_to_price = parseFloat($('div#tickets_to_price').attr('data-price'));
+        let tickets_from_price = parseFloat($('div#tickets_from_price').attr('data-price'));
+        let hostel_price = parseFloat($('div#hostel_price').attr('data-price') * days);
+        let attrs_price = 0;
+        if($('form#attrForm input:checked').length > 0) {
+            attrs_price = $('form#attrForm input:checked').map(function (e) {
+                return parseFloat($(this).attr('data-price'));
+            });
+            attrs_price = Array.from(attrs_price).reduce(function (previousValue, currentValue, index, array) {
+                return previousValue + currentValue;
+            });
+        }
+//        alert(tickets_from_price);
+//        alert(hostel_price);
+//        alert(attrs_price);
+        return tickets_to_price + tickets_from_price + hostel_price + attrs_price;
     }
 
 })
