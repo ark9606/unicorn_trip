@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Unicorn TRIP</title>
+    <title>Accept order| Unicorn TRIP</title>
     <link rel="shortcut icon" href="/public/images/horn.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/accept.css">
 </head>
 <body>
 <script>
@@ -144,7 +144,7 @@
         </div>
     </div>
     <div id="total-price"></div>
-    <input type="submit" form="attrForm" value="Отправить">
+    <input type="submit" form="attrForm">
 </div>
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
@@ -153,21 +153,7 @@ $(function () {
 
     $('form#attrForm').submit(function (e) {
         e.preventDefault();
-        let attrs = $('form#attrForm input:checked').map(function (e) {
-            return parseInt($(this).attr('value'));
-        });
-        attrs = Array.from(attrs).join(',');
-        alert(attrs);
-//        $.ajax({
-//            url: "/accept",
-//            method: "POST",
-//            cache: false,
-//            data: {
-//                price, cityFrom,cityTo,days,attr: attr.join(','),date
-//            },
-//            success: function (data) {
-//            }
-//        });
+        $('div#total-price').text(calcPrice() + '$');
 
 //        let attrs = $('form#attrForm input:checked').map(function (e) {
 //            return $(this).attr('value');
@@ -294,7 +280,6 @@ $(function () {
 
                     $('div#total-price').text(calcPrice() + '$');
                     curr = {tick_to: 0, tick_back:0, room: 0};
-
                     $('div.switch').click(function (e) {
                         let dir = parseInt($(this).attr('data-dir'));
                         let mar = $(this).parent().parent().children().eq(0).css('margin-left');
@@ -329,11 +314,6 @@ $(function () {
                         }
 
                     });
-                    $('form#attrForm label').click(function (e) {
-//                        calcPrice();
-                        $('div#total-price').text(calcPrice() + '$');
-
-                    });
                 }
                 else{
                     console.log('no');
@@ -345,7 +325,6 @@ $(function () {
             }
         });
     });
-
     function calcPrice() {
         let tickets_to_price = obj.tickets_to[curr.tick_to].price;
         let tickets_from_price = obj.tickets_back[curr.tick_back].price;
@@ -360,7 +339,6 @@ $(function () {
                 return previousValue + currentValue;
             });
         }
-        alert(attrs_price);
         return tickets_to_price + tickets_from_price + hostel_price + attrs_price;
     }
 

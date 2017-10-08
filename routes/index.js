@@ -27,7 +27,10 @@ router.get('/', function(req, res, next) {
         });
     });
 });
+router.post('/accept', function(req, res, next) {
 
+
+});
 router.post('/process', function(req, res, next) {
     let price = parseFloat(req.body.price);
     let cityFrom = req.body.cityFrom;
