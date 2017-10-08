@@ -149,6 +149,7 @@
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
+    let curr = {tick_to: 0, tick_back:0, room: 0};
 
     $('form#attrForm').submit(function (e) {
         e.preventDefault();
@@ -162,6 +163,7 @@ $(function () {
     });
 
     let days = 1;
+    let obj = null;
     $('form#startTHIS').submit(function (e) {
         e.preventDefault();
         let from = document.getElementById('startTHIS');
@@ -197,7 +199,7 @@ $(function () {
 
                     return;
                 }
-                let obj = JSON.parse(data);
+                obj = JSON.parse(data);
                 console.log(obj);
                 if(obj.attractions.length > 0){
                     //TODO сделать вывод результата
@@ -207,7 +209,7 @@ $(function () {
                         let thisDate = obj.tickets_to[i].datetime;
                         thisDate = thisDate.replace('T', ' ').substr(0, thisDate.indexOf('.'));
                         str+=`         <div class="result-slide" data-num=${i}>
-                            <div class="switch switch-left" data-dir="-1"></div>
+                            <div class="switch switch-left" data-dir="-1" data-type='0'></div>
                                     <div class="result-content">
                                         <div class="image-cont"><div class="image"></div><div class="price" class="tickets_to_price" data-price=${obj.tickets_to[i].price}>${obj.tickets_to[i].price}$</div></div>
                                         <div class="info-cont">
@@ -223,7 +225,7 @@ $(function () {
 
                                         </div>
                                     </div>
-                                    <div class="switch switch-right" data-dir="1"></div></div>`;
+                                    <div class="switch switch-right" data-dir="1" data-type='0'></div></div>`;
 
                     }
                     $('div.results-ticket-to').append(str);
@@ -233,7 +235,7 @@ $(function () {
                         let thisDate = obj.tickets_back[i].datetime;
                         thisDate = thisDate.replace('T', ' ').substr(0, thisDate.indexOf('.'));
                         str+=`         <div class="result-slide" data-num=${i}>
-                            <div class="switch switch-left" data-dir="-1"></div>
+                            <div class="switch switch-left" data-dir="-1" data-type='1'></div>
                                     <div class="result-content">
                                         <div class="image-cont"><div class="image"></div><div class="price" class="tickets_from_price" data-price=${obj.tickets_back[i].price}>${obj.tickets_back[i].price}$</div></div>
                                         <div class="info-cont">
@@ -249,7 +251,7 @@ $(function () {
 
                                         </div>
                                     </div>
-                                    <div class="switch switch-right" data-dir="1"></div></div>`;
+                                    <div class="switch switch-right" data-dir="1" data-type='1'></div></div>`;
 
                     }
                     $('div.results-ticket-back').append(str);
@@ -258,7 +260,7 @@ $(function () {
 //                        let thisDate = obj.tickets_back[i].datetime;
 //                        thisDate = thisDate.replace('T', ' ').substr(0, thisDate.indexOf('.'));
                         str+=`         <div class="result-slide" data-num=${i}>
-                                                        <div class="switch switch-left"></div>
+                                                        <div class="switch switch-left" data-dir="-1" data-type='2'></div>
                             <div class="result-content">
                                 <div class="image-cont"><div class="image"></div><div class="price" class="hostel_price" data-price=${obj.rooms[i].price}>${obj.rooms[i].price}$</div></div>
                                 <div class="info-cont">
@@ -268,7 +270,8 @@ $(function () {
 
                                 </div>
                             </div>
-                            <div class="switch switch-right"></div></div>`;
+                            <div class="switch switch-right" data-dir="1" data-type='2'></div>
+                            </div>`;
 
                     }
                     $('div.results-hotels').append(str);
@@ -281,26 +284,41 @@ $(function () {
                     }
                     $('form#attrForm').append(str);
 
-                    $('div#total-price').text(calcPrice(0,0,0) + '$');
-
+                    $('div#total-price').text(calcPrice() + '$');
+                    curr = {tick_to: 0, tick_back:0, room: 0};
                     $('div.switch').click(function (e) {
                         let dir = parseInt($(this).attr('data-dir'));
                         let mar = $(this).parent().parent().children().eq(0).css('margin-left');
                         let count = $(this).parent().parent().children().length;
                         if(dir>0){
-                            if($(this).parent().parent().children().eq(count - 1) === $(this).parent()) {
+                            if((count-1) === $(this).parent().index()) {
                                 return;
                             }
+                            console.log('>');
                             $(this).parent().parent().children().eq(0).css('margin-left', 'calc( ' + mar +' - 100% )');
-//                            $(this).parent().parent().children().eq(0).animate({marginLeft: 'calc( ' + mar +' - 100% )'}, 250);
+                            if($(this).attr('data-type') === '0')
+                                curr.tick_to = $(this).parent().index()+1;
+                            else if ($(this).attr('data-type') === '1')
+                                curr.tick_back = $(this).parent().index()+1;
+                            else if ($(this).attr('data-type') === '2')
+                                curr.room = $(this).parent().index()+1;
+                            $('div#total-price').text(calcPrice() + '$');
                         }
                         else{
-                            if($(this).parent().parent().children().eq(0) === $(this).parent()) {
+                            if(0 === $(this).parent().index()) {
                                 return;
                             }
+                            console.log('<');
                             $(this).parent().parent().children().eq(0).css('margin-left', 'calc( ' + mar +' + 100% )');
+                            if($(this).attr('data-type') === '0')
+                                curr.tick_to = $(this).parent().index()-1;
+                            else if ($(this).attr('data-type') === '1')
+                                curr.tick_back = $(this).parent().index()-1;
+                            else if ($(this).attr('data-type') === '2')
+                                curr.room = $(this).parent().index()-1;
+                            $('div#total-price').text(calcPrice() + '$');
                         }
-                        $('div#total-price').text(calcPrice(1,0,0) + '$');
+
                     });
                 }
                 else{
@@ -313,10 +331,15 @@ $(function () {
             }
         });
     });
-    function calcPrice(index0,index1, index2) {
-        let tickets_to_price = parseFloat($('div.tickets_to_price').eq(index0).attr('data-price'));
-        let tickets_from_price = parseFloat($('div.tickets_from_price').eq(index1).attr('data-price'));
-        let hostel_price = parseFloat($('div.hostel_price').eq(index2).attr('data-price') * days);
+    function calcPrice() {
+        let tickets_to_price = obj.tickets_to[curr.tick_to].price;
+        let tickets_from_price = obj.tickets_back[curr.tick_back].price;
+        let hostel_price = obj.rooms[curr.room].price;
+//        alert(tickets_to_price)
+////        let tickets_to_price = parseFloat($('div.tickets_to_price:eq(0)').attr('data-price'));
+//        console.log($('div.price div.tickets_to_price').attr('data-price'));
+////        let tickets_from_price = parseFloat($('div.tickets_from_price:nth-child(' + index1+ ')').attr('data-price'));
+//        let hostel_price = parseFloat($('div.hostel_price:nth-child(' + index2+ ')').attr('data-price') * days);
         let attrs_price = 0;
         if($('form#attrForm input:checked').length > 0) {
             attrs_price = $('form#attrForm input:checked').map(function (e) {
@@ -326,9 +349,9 @@ $(function () {
                 return previousValue + currentValue;
             });
         }
-//        alert(tickets_from_price);
-//        alert(hostel_price);
-//        alert(attrs_price);
+        alert(tickets_to_price);
+        alert(tickets_from_price);
+        alert(hostel_price);
         return tickets_to_price + tickets_from_price + hostel_price + attrs_price;
     }
 
