@@ -92,12 +92,12 @@
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
-    console.log(new Date().toLocaleDateString().split('.').reverse().join('-'));
-    $('form#attrForm input').change(function () {
-        alert('fff');
-    });
-    $('form#startTHIS input[type="date"]').click(function (e) {
-        if()
+    $('form#startTHIS input[type="date"]').change(function (e) {
+        e.preventDefault();
+        if($(this).val() <=  new Date().toLocaleDateString().split('.').reverse().join('-')){
+            alert('Choose the correct date');
+            $(this).val( new Date().toLocaleDateString().split('.').reverse().join('-'));
+        }
     });
     let curr = {tick_to: 0, tick_back:0, room: 0};
     let totPrice = 0;
