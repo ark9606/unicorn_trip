@@ -18,27 +18,27 @@
       <file leaf-file-name="index.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="74" lean-forward="false" selection-start-line="18" selection-start-column="74" selection-end-line="18" selection-end-column="74" />
+            <state relative-caret-position="453">
+              <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
               <folding>
-                <marker date="1507433491459" expanded="true" signature="5473:6753" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="5633:5806" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="5633:6644" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="5908:6601" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="5976:6117" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="6187:6279" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="6187:6346" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="6414:6553" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="7181:8467" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="7341:8358" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="7622:8315" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="7690:7829" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="7899:8058" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="8126:8267" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="8724:9615" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="8904:9485" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="9149:9450" ph="..." />
-                <marker date="1507433491459" expanded="true" signature="9825:10043" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="5764:7044" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="5924:6097" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="5924:6935" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="6199:6892" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="6267:6408" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="6478:6570" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="6478:6637" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="6705:6844" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="7472:8758" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="7632:8649" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="7913:8606" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="7981:8120" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="8190:8349" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="8417:8558" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="9015:9906" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="9195:9776" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="9440:9741" ph="..." />
+                <marker date="1507436116934" expanded="true" signature="10116:10334" ph="..." />
               </folding>
             </state>
           </provider>
@@ -97,8 +97,8 @@
       <file leaf-file-name="index.sass" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/sass/index.sass">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="73" column="29" lean-forward="false" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+            <state relative-caret-position="340">
+              <caret line="89" column="23" lean-forward="true" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -128,14 +128,13 @@
         <entry file="file://$PROJECT_DIR$/views/book_letter2.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="22" column="58" lean-forward="false" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+              <caret line="22" column="62" lean-forward="false" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h1#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -177,10 +176,10 @@
         <option value="$PROJECT_DIR$/views/accept.hbs" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/views/book_letter2.html" />
         <option value="$PROJECT_DIR$/public/sass/_common.sass" />
-        <option value="$PROJECT_DIR$/views/index.hbs" />
+        <option value="$PROJECT_DIR$/views/book_letter2.html" />
         <option value="$PROJECT_DIR$/public/sass/index.sass" />
+        <option value="$PROJECT_DIR$/views/index.hbs" />
       </list>
     </option>
   </component>
@@ -432,12 +431,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1507379074133</updated>
-      <workItem from="1507379077463" duration="50649000" />
+      <workItem from="1507379077463" duration="53103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50649000" />
+    <option name="totallyTimeSpent" value="53103000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -545,21 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/book_letter2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="58" lean-forward="false" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
-          <folding>
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h1#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-51">
@@ -584,37 +568,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/book_letter2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="62" lean-forward="false" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="74" lean-forward="false" selection-start-line="18" selection-start-column="74" selection-end-line="18" selection-end-column="74" />
+        <state relative-caret-position="453">
+          <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
           <folding>
-            <marker date="1507433491459" expanded="true" signature="5473:6753" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="5633:5806" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="5633:6644" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="5908:6601" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="5976:6117" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="6187:6279" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="6187:6346" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="6414:6553" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="7181:8467" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="7341:8358" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="7622:8315" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="7690:7829" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="7899:8058" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="8126:8267" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="8724:9615" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="8904:9485" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="9149:9450" ph="..." />
-            <marker date="1507433491459" expanded="true" signature="9825:10043" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="5764:7044" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="5924:6097" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="5924:6935" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="6199:6892" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="6267:6408" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="6478:6570" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="6478:6637" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="6705:6844" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="7472:8758" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="7632:8649" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="7913:8606" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="7981:8120" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="8190:8349" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="8417:8558" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="9015:9906" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="9195:9776" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="9440:9741" ph="..." />
+            <marker date="1507436116934" expanded="true" signature="10116:10334" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/sass/index.sass">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="73" column="29" lean-forward="false" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+        <state relative-caret-position="340">
+          <caret line="89" column="23" lean-forward="true" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
           <folding />
         </state>
       </provider>

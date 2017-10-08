@@ -5,84 +5,90 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Unicorn TRIP</title>
-    <link rel="shortcut icon" href="/public/images/horn.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/horn.ico" type="image/x-icon">
     <link rel="stylesheet" href="/stylesheets/index.css">
 </head>
 <body>
+<div class="back">
+
+</div>
 <script>
     let cities = [];
 </script>
-<header>Unicorn</header>
-<form action="/process" method="post" id="startTHIS">
-    <label>
+<main>
+    <header>Unicorn</header>
+    <form action="/process" method="post" id="startTHIS">
+        <label>
 
-        <input type="number" name="price" required step="0.01" value="1000" placeholder="Price" min="5"></label>
-    <label>
-        <select name="cityFrom" id="" required>
-            <option value="" selected="selected" disabled>Origin</option>
-            {{#each cities}}
-                <option value="{{this.id}}">{{this.name}}</option>
-                <script> cities.push({id:parseInt('{{this.id}}'), name: '{{this.name}}'})</script>
-            {{/each}}
-        </select>
-    </label>
-    <label>
-        <select name="cityTo" id="" required>
-            <option value="" selected="selected" disabled>Destination</option>
-
-            {{#each cities}}
-                <option value="{{this.id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-    </label>
-    <label>
-        <input type="number" name="days" required min="1" value="3" placeholder="Days"></label>
-
-    </label>
-    <label>
-        <div id="attr">
-            <details>
-                <summary>Attractions</summary>
-                {{#each categories}}
-                    <label><input type="checkbox" value="{{this.id}}">{{this.name}}</label>
+            <input type="number" name="price" required step="0.01" value="1000" placeholder="Price" min="5"></label>
+        <label>
+            <select name="cityFrom" id="" required>
+                <option value="" selected="selected" disabled>Origin</option>
+                {{#each cities}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                    <script> cities.push({id:parseInt('{{this.id}}'), name: '{{this.name}}'})</script>
                 {{/each}}
-            </details>
+            </select>
+        </label>
+        <label>
+            <select name="cityTo" id="" required>
+                <option value="" selected="selected" disabled>Destination</option>
+
+                {{#each cities}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </label>
+        <label>
+            <input type="number" name="days" required min="1" value="3" placeholder="Days"></label>
+
+        </label>
+        <label>
+            <div id="attr">
+                <details>
+                    <summary>Attractions</summary>
+                    {{#each categories}}
+                        <label><input type="checkbox" value="{{this.id}}">{{this.name}}</label>
+                    {{/each}}
+                </details>
+            </div>
+            <!--<p>Attraction</p>-->
+
+            <!--<select name="attr" id="" required>-->
+                <!--{{#each categories}}-->
+            <!--<option value="{{this.id}}">{{this.name}}</option>-->
+                <!--{{/each}}-->
+            <!--</select>-->
+        </label>
+        <label for="">
+            <p>Date</p>
+            <input type="date" name="date" required>
+        </label>
+        <input type="submit" value="Choose">
+    </form>
+
+
+    <div class="results">
+        <div class="results-tickets result-item results-ticket-to">
+
         </div>
-        <!--<p>Attraction</p>-->
+        <div class="results-tickets result-item results-ticket-back">
 
-        <!--<select name="attr" id="" required>-->
-            <!--{{#each categories}}-->
-                <!--<option value="{{this.id}}">{{this.name}}</option>-->
-            <!--{{/each}}-->
-        <!--</select>-->
-    </label>
-    <label for="">
-        <p>Date</p>
-        <input type="date" name="date" required>
-    </label>
-    <input type="submit">
-</form>
-
-
-<div class="results">
-    <div class="results-tickets result-item results-ticket-to">
-
-    </div>
-    <div class="results-tickets result-item results-ticket-back">
-
-    </div>
-    <div class="results-hotels result-item">
-
-    </div>
-    <div class="results-attrs">
-        <div class="result-content">
-            <form action="" id="attrForm">
-            </form>
         </div>
+        <div class="results-hotels result-item">
+
+        </div>
+        <div class="results-attrs">
+            <div class="result-content">
+                <form action="" id="attrForm">
+                </form>
+            </div>
+        </div>
+        <div id="total-price"></div>
+        <input type="submit" form="attrForm" value="Отправить">
     </div>
-    <div id="total-price"></div>
-    <input type="submit" form="attrForm" value="Отправить">
-</div>
+</main>
+
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
