@@ -15,7 +15,8 @@ body
       height: 100px
       font-size: 3em
       text-align: center
-      color: $clr_green
+      //color: $clr_green
+      //color: white
       margin-top: 40px
     form#startTHIS
       display: flex
@@ -118,6 +119,7 @@ main
       justify-content: space-between
       overflow: hidden
       position: relative
+      margin-bottom: 20px
       div.result-slide
         flex-basis: 100%
         min-width: 100%
@@ -207,9 +209,10 @@ main
               margin: 5px
               &.name
                 font-size: 1.3em
+                color: $clr_green
     div.results-attrs
       width: 100%
-      background: blueviolet
+      background: rgba(0, 159, 0, 0.75)
       min-height: 200px
       form#attrForm
         min-height: 200px
@@ -230,6 +233,31 @@ main
           cursor: pointer
           &:hover
             color: white
+    div#total-price
+      background: rgba(200,200,200,0.8)
+      text-align: center
+      padding: 30px 0
+      margin: 20px 0
+    input[type='submit']
+      //margin: 0 auto
+      align-self: center
+      width: 258px
+      margin:  0 0px 30px 0
+      height: 40px
+      background: white
+      border: 1px solid $clr_green
+      color: $clr_green
+      font-size: 1.1em
+      transition: .3s
+      cursor: pointer
+      &:hover
+        background: $clr_green
+        color: white
+.selected
+  color: white
+
+//.selected
+//  color: white
 //@keyframes mySlideAnim
 //  0%
 //    margin-left: 0

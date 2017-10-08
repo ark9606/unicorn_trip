@@ -85,13 +85,16 @@
             </div>
         </div>
         <div id="total-price"></div>
-        <input type="submit" form="attrForm" value="Отправить">
+        <input type="submit" form="attrForm" value="Accept">
     </div>
 </main>
 
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
+    $('form#attrForm input').change(function () {
+        alert('fff');
+    });
     let curr = {tick_to: 0, tick_back:0, room: 0};
     let totPrice = 0;
     $('form#attrForm').submit(function (e) {
@@ -227,9 +230,9 @@ $(function () {
                 <label for="attr${i}">${obj.attractions[i].name}</label>`;
 
                     }
-                    $('form#attrForm').append(str);
+                    $('form#attrForm').html(str);
 
-                    $('div#total-price').text(calcPrice() + '$');
+                    $('div#total-price').text('Total ' + calcPrice() + '$');
                     curr = {tick_to: 0, tick_back:0, room: 0};
 
                     $('div.switch').click(function (e) {
@@ -248,7 +251,7 @@ $(function () {
                                 curr.tick_back = $(this).parent().index()+1;
                             else if ($(this).attr('data-type') === '2')
                                 curr.room = $(this).parent().index()+1;
-                            $('div#total-price').text(calcPrice() + '$');
+                            $('div#total-price').text('Total ' + calcPrice() + '$');
                         }
                         else{
                             if(0 === $(this).parent().index()) {
@@ -262,13 +265,19 @@ $(function () {
                                 curr.tick_back = $(this).parent().index()-1;
                             else if ($(this).attr('data-type') === '2')
                                 curr.room = $(this).parent().index()-1;
-                            $('div#total-price').text(calcPrice() + '$');
+                            $('div#total-price').text('Total ' + calcPrice() + '$');
                         }
 
                     });
-
+                    $('form#attrForm label').click(function (e) {
+//                        alert('fff');
+                        $(this).toggleClass('selected');
+                    });
                     $('form#attrForm input').change(function (e) {
-                        $('div#total-price').text(calcPrice() + '$');
+                        $('div#total-price').text('Total ' + calcPrice() + '$');
+//                        let ch_id = $(this).attr('id');
+//                        alert(ch_id);
+//                        $('form#attrForm label[for="'+ch_id+'"]').css('red');
                     });
                 }
                 else{
