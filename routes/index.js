@@ -221,7 +221,7 @@ router.post('/process', function(req, res, next) {
         let hotel_price = ((price - tickets_Price) / 2) / days;
         let date_back = (date + "").split('-')[0] + '-'+(date + "").split('-')[1] +'-'+ (parseInt((date + "").split('-')[2]) + days);
         console.log(date_back);
-        connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where id_from = ? and id_to = ? and tickets.datetime >= ? and tickets.price <= ? ", [cityTo,cityFrom, date_back, tickets_Price/2],  function (error, tickets_back, fields) {
+        connection.query("SELECT tickets.id, ticket_types.name, tickets.image, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where id_from = ? and id_to = ? and tickets.datetime >= ? and tickets.price <= ? ", [cityTo,cityFrom, date_back, tickets_Price/2],  function (error, tickets_back, fields) {
             if (error) {
                 console.log( error);
                 res.send('%TICKET-ERROR%');
