@@ -52,7 +52,7 @@ router.post('/confirm', function(req, res, next) {
         connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where tickets.id = ? ", [req.session.data.tickets_from],  function (error, ticket_back, fields) {
             // select hostels
             // connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
-            connection.query("SELECT rooms.id, hotels.name, hotels.marks, hotels.address, rooms.price FROM unicorn.rooms inner join hotels on hotels.id = rooms.id_hostel where hotels.id ? ", [req.session.data.hostel],  function (error0, room, fields) {
+            connection.query("SELECT rooms.id, hotels.name, hotels.marks, hotels.address, rooms.price FROM unicorn.rooms inner join hotels on hotels.id = rooms.id_hostel where rooms.id = ? ", [req.session.data.hostel],  function (error0, room, fields) {
                 // select attrs
                 // connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
                 connection.query("SELECT attractions.id, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where attractions.id IN (" +req.session.data.attrs+") ",  function (error1, attractions, fields) {
@@ -62,8 +62,9 @@ router.post('/confirm', function(req, res, next) {
                         data = data.replace("@@ticket_to", 'from ' + req.session.data.cf + ', to ' + req.session.data.ct + ' at ' + ('' + ticket_to[0].datetime).substr(0, ('' +ticket_to[0].datetime).indexOf("GMT") ) + ' during ' + ticket_to[0].duration + ', price is '+ ticket_to[0].price + '$')
                             .replace("@@user", fio)
                             .replace("@@ticket_back", 'from ' + req.session.data.ct + ', to ' + req.session.data.cf + ', ' + ('' + ticket_back[0].datetime).substr(0, ('' +ticket_back[0].datetime).indexOf("GMT") ) + ' during ' + ticket_back[0].duration + ', price is '+ ticket_back[0].price + '$')
-                            .replace("@@hostel", 'Hotel ' + room[0].name + ', address ' + room[0].address  + ' guest rating is ' + room[0].mark + ', price for room is ' +  room[0].price + '$')
-                            .replace("@@totPrice", req.session.data.tp);
+                            .replace("@@hostel", 'Hotel ' + room[0].name + ', address ' + room[0].address  + ', guest rating is ' + room[0].marks + ', price for room is ' +  room[0].price + '$')
+                            .replace("@@attr", attractions.map((e)=> {return ' ' +e.name + ' - ' + e.price + '$'}))
+                            .replace("@@totPrice", req.session.data.tp + '$');
                         // console.log(data);
                         let mailOptions = {
                             from: '"Unicorn Trip"<theCinemaPortal@gmail.com>',
