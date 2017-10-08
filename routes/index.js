@@ -78,8 +78,9 @@ router.post('/confirm', function(req, res, next) {
                                 return console.error(err);
                             }
                             console.log('-Message ' + info.messageId + ' sent to ' + info.response);
+                            res.render('result', {rest: req.session.requestedPrice - req.session.data.tp})
+
                         });
-                        res.send('ok');
 
                     });
                 });
@@ -209,6 +210,8 @@ router.post('/process', function(req, res, next) {
                     console.log('attractions');
                     console.log(attractions);
                     // let res = {tickets, rooms, attractions};
+                    req.session.requestedPrice = price;
+
                     res.send(JSON.stringify({tickets_to, tickets_back, rooms, attractions}));
                     // let results =  combinator([ tickets, rooms, attractions ] );
                     // console.log('results');

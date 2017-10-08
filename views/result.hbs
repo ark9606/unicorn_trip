@@ -14,24 +14,71 @@
 </div>
 <main>
     <header>Unicorn</header>
-    <form action="/confirm" method="post" id="acceptForm">
-        <label>
-            <input type="text" name="fio" required  placeholder="Full name" ></label>
-        <label>
-            <input type="text" name="passport" required  placeholder="AO012345" ></label>
-        </label>
-        <label>
-            <input type="email" name="email" required  placeholder="Email" ></label>
-        </label>
-        <input type="submit">
+    <p>We saved {{rest}}$ for you. You can do a good deed...</p>
+    <form action="/charity" method="post" id="char">
+        <input type="submit" value="Do it">
+    </form>
+    <form action="/" method="get">
+        <input type="submit" value="Go to the home page">
     </form>
 </main>
-
+<script src="https://api.fondy.eu/static_common/v1/checkout/ipsp.js"></script>
+<script>
+    var button = $ipsp.get('button');
+    button.setMerchantId(1396424);
+    button.setAmount({{rest}}, 'USD', true);
+    button.setHost('api.fondy.eu');
+    button.setResponseUrl('http://localhost:3123');
+    button.addField({
+        label: 'Purpose of payment',
+        name: 'description',
+        value: 'Charity',
+        readonly: true
+    });
+</script>
 
 <script src="javascripts/jquery-3.2.1.min.js"></script>
+
 <script>
 $(function () {
+    $('form#char').submit(function (e) {
+        e.preventDefault();
+        location.href = button.getUrl();
 
+//        let form = document.querySelector('form#passengerInfo');
+//
+//        let firstName = form.firstName.value;
+//        let lastName = form.lastName.value;
+//        let date = form.date.value;
+//        let sex = form.sex.value;
+//        let number = form.number.value;
+//        let email = form.email.value;
+//
+//        if(firstName.length < 2 || lastName.length < 2) {
+//            alert('Введите имя и фамилию корректно!');
+//            return;
+//        }
+//        if (!valid_email(email)){
+//            alert('Введите Email корректно!');
+//            return;
+//        }
+//        $.ajax({
+//            url: "/ajax/book.php",
+//            method: "POST",
+//            cache: false,
+//            data: {
+//                action: 'pay',
+//                firstName, lastName, email, secureCode
+//            },
+//            success: function (data) {
+//                console.log(data);
+//                let pos = data.search('%YES%');
+//                if(pos > -1){
+//                }
+//            }
+//        });
+
+    });
 
 })
 </script>
