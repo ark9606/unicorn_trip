@@ -62,7 +62,7 @@
         </label>
         <label for="">
             <p>Date</p>
-            <input type="date" name="date" required>
+            <input type="date" name="date" required min="function(this){return new Date().toLocaleDateString().split('.').reverse().join('-')}">
         </label>
         <input type="submit" value="Choose">
     </form>
@@ -92,8 +92,12 @@
 <script src="javascripts/jquery-3.2.1.min.js"></script>
 <script>
 $(function () {
+    console.log(new Date().toLocaleDateString().split('.').reverse().join('-'));
     $('form#attrForm input').change(function () {
         alert('fff');
+    });
+    $('form#startTHIS input[type="date"]').click(function (e) {
+        if()
     });
     let curr = {tick_to: 0, tick_back:0, room: 0};
     let totPrice = 0;
@@ -109,7 +113,10 @@ $(function () {
         window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel + '&cf='+ name_city_from + '&ct=' + name_city_to + '&tp=' + totPrice;
 
     });
-
+//    $('input[type="date"]').change(function (e) {
+//        console.log($(this).val());
+//        if()
+//    });
     let days = 1;
     let obj = null;
 
@@ -146,9 +153,13 @@ $(function () {
                 if(data.indexOf('%') > -1 ) {
                     console.log('no');
                     $('div.results').css('display', 'none');
-
                     return;
                 }
+                let body = $("html, body");
+//                let top = $('div.results').offset().top;
+                let top = $('form#startTHIS').height();
+                body.animate({scrollTop: top}, 1000);
+
                 obj = JSON.parse(data);
                 console.log(obj);
                 if(obj.attractions.length > 0){
