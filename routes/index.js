@@ -249,7 +249,7 @@ router.post('/process', function(req, res, next) {
                 console.log(attr_price);
                 // select attrs
                 // connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
-                connection.query("SELECT attractions.id, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where id_city = ? and id_cat IN (" +attr+") and price <= ? ", [cityTo, attr_price],  function (error1, attractions, fields) {
+                connection.query("SELECT attractions.id, attractions.image, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where id_city = ? and id_cat IN (" +attr+") and price <= ? ", [cityTo, attr_price],  function (error1, attractions, fields) {
                     if (error1) {
                         console.log( error1);
                         res.send('%ATTR-ERROR%');
@@ -261,7 +261,8 @@ router.post('/process', function(req, res, next) {
                     }
 
                     console.log('attractions');
-                    console.log(attractions);
+                    console.dir(attractions);
+                    // console.dir(a)
                     // let res = {tickets, rooms, attractions};
                     req.session.requestedPrice = price;
 

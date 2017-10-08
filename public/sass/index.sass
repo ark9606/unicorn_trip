@@ -228,13 +228,22 @@ main
           visibility: hidden
         label
           display: block
-          min-height: 20px
+          min-height: 60px
           width: 100px
           margin: 10px 5px
           cursor: pointer
           text-align: center
+          background-size: cover
+          background-position: center center
+          background-repeat: no-repeat
+          color: rgba(255,255,255,0)
+          display: flex
+          align-items: center
+          justify-content: center
           &:hover
             color: white
+            background-image: none !important
+            background: transparent
     div#total-price
       background: rgba(200,200,200,0.8)
       text-align: center
@@ -257,6 +266,8 @@ main
         color: white
 .selected
   color: white
+  background-image: none !important
+  //background: transparent
 
 //.selected
 //  color: white

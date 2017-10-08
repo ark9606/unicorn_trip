@@ -238,7 +238,7 @@ $(function () {
                     for(let i=0; i< obj.attractions.length; i++){
                         str+=`
                     <input type="checkbox" class="attr-item" id="attr${i}" value=${obj.attractions[i].id} data-price=${obj.attractions[i].price}>
-                <label for="attr${i}">${obj.attractions[i].name}</label>`;
+                <label for="attr${i}" style="background-image: url('${obj.attractions[i].image}')">${obj.attractions[i].name}</label>`;
 
                     }
                     $('form#attrForm').html(str);
