@@ -9,31 +9,19 @@
     <link rel="stylesheet" href="/stylesheets/accept.css">
 </head>
 <body>
-<script>
-    let cities = [];
-</script>
+
 <header>Unicorn</header>
 <form action="/process" method="post" id="startTHIS">
     <label>
 
-        <input type="number" name="price" required step="0.01" value="1000" placeholder="Price" min="5"></label>
+        <input type="text" name="fio" required  placeholder="Full name" ></label>
     <label>
-        <select name="cityFrom" id="" required>
-            <option value="" selected="selected" disabled>Origin</option>
-            {{#each cities}}
-                <option value="{{this.id}}">{{this.name}}</option>
-                <script> cities.push({id:parseInt('{{this.id}}'), name: '{{this.name}}'})</script>
-            {{/each}}
-        </select>
+        <input type="text" name="passport" required  placeholder="AO012345" ></label>
+
     </label>
     <label>
-        <select name="cityTo" id="" required>
-            <option value="" selected="selected" disabled>Destination</option>
+        <input type="email" name="email" required  placeholder="Email" ></label>
 
-            {{#each cities}}
-                <option value="{{this.id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
     </label>
     <label>
         <input type="number" name="days" required min="1" value="3" placeholder="Days"></label>

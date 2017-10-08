@@ -157,17 +157,20 @@ $(function () {
             return parseInt($(this).attr('value'));
         });
         attrs = Array.from(attrs).join(',');
-        alert(attrs);
-//        $.ajax({
-//            url: "/accept",
-//            method: "POST",
-//            cache: false,
-//            data: {
-//                price, cityFrom,cityTo,days,attr: attr.join(','),date
-//            },
-//            success: function (data) {
-//            }
-//        });
+        let tickets_to = obj.tickets_to[curr.tick_to].id;
+        let tickets_from = obj.tickets_back[curr.tick_back].id;
+        let hostel = obj.rooms[curr.room].id;
+        window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel;
+        $.ajax({
+            url: "/accept",
+            method: "GET",
+            cache: false,
+            data: {
+                attrs, tickets_to,tickets_from,hostel
+            },
+            success: function (data) {
+            }
+        });
 
 //        let attrs = $('form#attrForm input:checked').map(function (e) {
 //            return $(this).attr('value');
@@ -329,10 +332,9 @@ $(function () {
                         }
 
                     });
-                    $('form#attrForm label').click(function (e) {
-//                        calcPrice();
-                        $('div#total-price').text(calcPrice() + '$');
 
+                    $('form#attrForm input').change(function (e) {
+                        $('div#total-price').text(calcPrice() + '$');
                     });
                 }
                 else{
@@ -354,11 +356,17 @@ $(function () {
         let attrs_price = 0;
         if($('form#attrForm input:checked').length > 0) {
             attrs_price = $('form#attrForm input:checked').map(function (e) {
+                alert('p' + $(this).attr('data-price'));
                 return parseFloat($(this).attr('data-price'));
             });
-            attrs_price = Array.from(attrs_price).reduce(function (previousValue, currentValue, index, array) {
-                return previousValue + currentValue;
-            });
+            let sum = 0;
+            for(let i = 0; i< attrs_price.length; i++){
+                sum+=attrs_price[i];
+            }
+            attrs_price = sum;
+//            attrs_price = Array.from(attrs_price).reduce(function (previousValue, currentValue, index, array) {
+//                return previousValue + currentValue;
+//            });
         }
         alert(attrs_price);
         return tickets_to_price + tickets_from_price + hostel_price + attrs_price;

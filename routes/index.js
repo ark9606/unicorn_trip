@@ -27,8 +27,15 @@ router.get('/', function(req, res, next) {
         });
     });
 });
-router.post('/accept', function(req, res, next) {
+router.get('/accept', function(req, res, next) {
+    let attrs = req.param('attrs');
+    let tickets_to = req.param('tickets_to');
+    let tickets_from = req.param('tickets_from');
+    let hostel = req.param('hostel');
 
+    res.render('accept');
+
+    // res.send(req.param('attrs'));
 
 });
 router.post('/process', function(req, res, next) {
