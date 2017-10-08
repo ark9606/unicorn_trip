@@ -62,79 +62,17 @@
     </label>
     <input type="submit">
 </form>
-<!--<div class="results">-->
-    <!--<div class="results-tickets result-item">-->
-        <!--<div class="switch switch-left"></div>-->
-        <!--<div class="result-content"></div>-->
-        <!--<div class="switch switch-right"></div>-->
-    <!--</div>-->
-    <!--<div class="results-hotels result-item">-->
 
-    <!--</div>-->
-    <!--<div class="results-attrs result-item">-->
-
-    <!--</div>-->
-<!--</div>-->
 
 <div class="results">
     <div class="results-tickets result-item results-ticket-to">
-        <!--<div class="results-tickets-to-inner">-->
 
-        <!--</div>-->
-
-
-        <!--<div class="result-slide">-->
-
-        <!--<div class="switch switch-left"></div>-->
-        <!--<div class="result-content">-->
-            <!--<div class="image-cont"><div class="image"></div><div class="price">120$</div></div>-->
-            <!--<div class="info-cont">-->
-                <!--<div class="part item">-->
-                    <!--<div class="city">City 1</div>-->
-                <!--</div>-->
-                <!--<DIV class="middle item">-->
-                    <!--<div class="line"></div><div class="date">17.09.2017 17:00</div>-->
-                <!--</DIV>-->
-                <!--<div class="part item">-->
-                    <!--<div class="city">City 2</div>-->
-                <!--</div>-->
-
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="switch switch-right"></div>-->
-        <!--</div>-->
     </div>
     <div class="results-tickets result-item results-ticket-back">
-        <!--<div class="switch switch-left" ></div>-->
-        <!--<div class="result-content">-->
-            <!--<div class="image-cont"><div class="image"></div><div class="price">120$</div></div>-->
-            <!--<div class="info-cont">-->
-                <!--<div class="part item">-->
-                    <!--<div class="city">City 1</div>-->
-                <!--</div>-->
-                <!--<DIV class="middle item">-->
-                    <!--<div class="line"></div><div class="date">17.09.2017 17:00</div>-->
-                <!--</DIV>-->
-                <!--<div class="part item">-->
-                    <!--<div class="city">City 2</div>-->
-                <!--</div>-->
 
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="switch switch-right" data-dir="1"></div>-->
     </div>
     <div class="results-hotels result-item">
-        <!--<div class="switch switch-left"></div>-->
-        <!--<div class="result-content">-->
-            <!--<div class="image-cont"><div class="image"></div><div class="price">120$</div></div>-->
-            <!--<div class="info-cont">-->
-                <!--<span class="name">dwddwd</span>-->
-                <!--<span class="mark">5</span>-->
-                <!--<span class="address">dewdf ewdf ef ewf</span>-->
 
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="switch switch-right"></div>-->
     </div>
     <div class="results-attrs">
         <div class="result-content">
@@ -159,25 +97,8 @@ $(function () {
         let tickets_to = obj.tickets_to[curr.tick_to].id;
         let tickets_from = obj.tickets_back[curr.tick_back].id;
         let hostel = obj.rooms[curr.room].id;
-//        alert(name_city_from);
-//        alert(name_city_to);
         window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel + '&cf='+ name_city_from + '&ct=' + name_city_to + '&tp=' + totPrice;
-//        $.ajax({
-//            url: "/accept",
-//            method: "GET",
-//            cache: false,
-//            data: {
-//                attrs, tickets_to,tickets_from,hostel
-//            },
-//            success: function (data) {
-//            }
-//        });
 
-//        let attrs = $('form#attrForm input:checked').map(function (e) {
-//            return $(this).attr('value');
-//        });
-//        console.log(attrs[0]);
-//        calcPrice();
     });
 
     let days = 1;
@@ -198,6 +119,10 @@ $(function () {
         $('form#startTHIS div#attr input:checked').each(function() {
             attr.push($(this).attr('value'));
         });
+        if (attr.length === 0){
+            alert('Choose category attraction, please');
+            return;
+        }
         let date = from.date.value ;
         $.ajax({
             url: "/process",
