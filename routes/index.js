@@ -27,16 +27,111 @@ router.get('/', function(req, res, next) {
         });
     });
 });
+const nodemailer = require('nodemailer');
+const fs = require('fs');
+
+let smtpConfig = {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+        user: 'theCinemaPortal@gmail.com',
+        pass: 'theCinemaPortal04032010'
+    }
+};
+let sender = nodemailer.createTransport(smtpConfig);
+
+router.post('/confirm', function(req, res, next) {
+    let fio = req.body.fio;
+    let passport = req.body.passport;
+    let email = req.body.email;
+    console.log(req.session.data );
+
+    //attrs, tickets_to, tickets_from, hostel
+    connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where tickets.id = ? ", [req.session.data.tickets_to],  function (error, ticket_to, fields) {
+        connection.query("SELECT tickets.id, ticket_types.name, tickets.datetime, tickets.duration, tickets.price FROM unicorn.tickets inner join unicorn.ticket_types on tickets.id_type = ticket_types.id where tickets.id = ? ", [req.session.data.tickets_from],  function (error, ticket_back, fields) {
+            // select hostels
+            // connection.query("SELECT * FROM unicorn.rooms where id_hostel = (SELECT id from hotels where id_city = ? ) and price <= ? ", [cityTo, hotel_price],  function (error0, rooms, fields) {
+            connection.query("SELECT rooms.id, hotels.name, hotels.marks, hotels.address, rooms.price FROM unicorn.rooms inner join hotels on hotels.id = rooms.id_hostel where hotels.id ? ", [req.session.data.hostel],  function (error0, room, fields) {
+                // select attrs
+                // connection.query("SELECT * FROM unicorn.attractions where id_city = ? and id_cat IN (" +attr+") and price <= ?", [cityTo, attr_price],  function (error1, attractions, fields) {
+                connection.query("SELECT attractions.id, att_categories.name as 'category', attractions.duration, attractions.price, attractions.name FROM unicorn.attractions inner join att_categories on att_categories.id = attractions.id_cat where attractions.id IN (" +req.session.data.attrs+") ",  function (error1, attractions, fields) {
+                    fs.readFile('views/book_letter2.html',{encoding: 'utf8'}, function (err, data) {
+                        if(err){console.error(err); return;}
+
+                        data = data.replace("@@ticket_to", 'from ' + req.session.data.cf + ', to ' + req.session.data.cf + ' at ' + ticket_to[0].datetime + ' during ' + ticket_to[0].duration + ', price is '+ ticket_to[0].price + '$')
+                            .replace("@@user", fio)/*
+                            .replace("@@date", req.session.sesInfo.dateTime)
+                            .replace("@@hall", req.session.sesInfo.hallName)*/;
+                        // console.log(data);
+                        let mailOptions = {
+                            from: '"Unicorn Trip"<theCinemaPortal@gmail.com>',
+                            to: email,
+                            subject: 'Booking | Unicorn Trip',
+                            html: data
+                        };
+                        sender.sendMail(mailOptions, (err, info) => {
+                            if(err){
+                                console.log('ошибка отправки');
+                                return console.error(err);
+                            }
+                            console.log('-Message ' + info.messageId + ' sent to ' + info.response);
+                        });
+                        res.send('ok');
+
+                    });
+                });
+
+
+                // res.send(rooms);
+            });
+
+
+            // res.send(results0);
+        });
+
+    });
+
+
+
+    // fs.readFile('views/book_letter2.html',{encoding: 'utf8'}, function (err, data) {
+    //     if(err){console.error(err); return;}
+    //
+    //     data = data.replace("@@ticket_to", /*JSON.stringify(req.body.seats)*/ ticket_to)
+    //         .replace("@@movie", req.session.sesInfo.movieName)
+    //         .replace("@@date", req.session.sesInfo.dateTime)
+    //         .replace("@@hall", req.session.sesInfo.hallName);
+    //     // console.log(data);
+    //     let mailOptions = {
+    //         from: '"Кинотеатр PORTAL"<theCinemaPortal@gmail.com>',
+    //         to: email,
+    //         subject: 'Бронирование мест',
+    //         html: data
+    //     };
+    //     sender.sendMail(mailOptions, (err, info) => {
+    //         if(err){
+    //             console.log('ошибка отправки');
+    //             return console.error(err);
+    //         }
+    //         console.log('-Message ' + info.messageId + ' sent to ' + info.response);
+    //     });
+    //     res.send('ok');
+    //
+    // });
+
+});
+
 router.get('/accept', function(req, res, next) {
     let attrs = req.param('attrs');
     let tickets_to = req.param('tickets_to');
     let tickets_from = req.param('tickets_from');
     let hostel = req.param('hostel');
-
+    let cf = req.param('cf');
+    let ct = req.param('ct');
+    req.session.data = {
+        attrs, tickets_to, tickets_from, hostel, cf,ct
+    };
     res.render('accept');
-
-    // res.send(req.param('attrs'));
-
 });
 router.post('/process', function(req, res, next) {
     let price = parseFloat(req.body.price);

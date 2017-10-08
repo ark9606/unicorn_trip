@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+let expressSession = require('express-session');
 var app = express();
 
 
@@ -28,7 +28,7 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(expressSession({secret: 'g45fdg456fg4d5g4fd465xz1c2dr', saveUninitialized: true, resave: true, expires: false}));
 app.use('/', index);
 app.use('/users', users);
 

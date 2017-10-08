@@ -160,7 +160,7 @@ $(function () {
         let tickets_to = obj.tickets_to[curr.tick_to].id;
         let tickets_from = obj.tickets_back[curr.tick_back].id;
         let hostel = obj.rooms[curr.room].id;
-        window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel;
+        window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel + '&cf='+ cityFrom + '&ct=' + cityTo;
         $.ajax({
             url: "/accept",
             method: "GET",
@@ -181,12 +181,14 @@ $(function () {
 
     let days = 1;
     let obj = null;
+
+    let cityFrom = '', cityTo = '';
     $('form#startTHIS').submit(function (e) {
         e.preventDefault();
         let from = document.getElementById('startTHIS');
         let price = from.price.value;
-        let cityFrom = from.cityFrom.value ;
-        let cityTo = from.cityTo.value ;
+        cityFrom = from.cityFrom.value ;
+        cityTo = from.cityTo.value ;
         days = from.days.value ;
         let name_city_from = from.cityFrom.options[from.cityFrom.selectedIndex ].text;
         let name_city_to = from.cityTo.options[from.cityTo.selectedIndex ].text;
@@ -356,7 +358,7 @@ $(function () {
         let attrs_price = 0;
         if($('form#attrForm input:checked').length > 0) {
             attrs_price = $('form#attrForm input:checked').map(function (e) {
-                alert('p' + $(this).attr('data-price'));
+//                alert('p' + $(this).attr('data-price'));
                 return parseFloat($(this).attr('data-price'));
             });
             let sum = 0;
@@ -368,7 +370,7 @@ $(function () {
 //                return previousValue + currentValue;
 //            });
         }
-        alert(attrs_price);
+//        alert(attrs_price);
         return tickets_to_price + tickets_from_price + hostel_price + attrs_price;
     }
 
