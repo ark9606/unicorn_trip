@@ -9,6 +9,60 @@ let connection = mysql.createConnection({
     database : 'unicorn'
 });
 connection.connect();
+const fs = require('fs');
+
+
+
+
+// var API_KEY_HERE ='AIzaSyAWy-Plynx8csCjzqSGkKjvbqBGV9CFuLI';
+// var qpx = require('google-flights-wrapper1')(API_KEY_HERE);
+//
+// var dates=null;
+// var to ="";
+// var from = "";
+// fs.readFile('data.txt', function(err, data) {
+//     dates = data.toString();
+//     dates = dates.split("\r\n");
+//     for(var i=0;i<dates.length;i++)
+//     {
+//         let temp = dates[i].split(":");
+//         if(temp[1]=="Moscow")
+//             to=temp[0].toString();
+//         if(temp[1]=="Kiev")
+//             from=temp[0].toString();
+//     }
+//     qpx.api("1", "EUR500", "1", from, to, "2017-12-08", function(data){
+//         for(var j=0;j<data.length;j++) {
+//             var m = (parseInt(data[0][j]['arrivalTime:'].split("T")[1].split('+')[0].split(":")[0] * 60) + parseInt(data[0][j]['arrivalTime:'].split("T")[1].split('+')[0].split(":")[1]) - parseInt(data[0][j]['departureTime:'].split("T")[1].split('+')[0].split(":")[0] * 60) + parseInt(data[0][j]['departureTime:'].split("T")[1].split('+')[0].split(":")[1])) / 60;
+//             console.log(m.toString().split('.')[0] + ":" + m.toString().split('.')[1] + " " + data[0][j].price.substring(3));
+//         }
+//         for(let i = 0; i< dates.length ; i++) {
+//             // connection.query('INSERT INTO tickets (id_from, id_to, datetime, price, duration) VALUES (?, ?, ?, ?, ?);', [d], function (error0, results0, fields) {
+//             connection.query('INSERT INTO cities (id_from, id_to, datetime, price, duration) VALUES (?, ?, ?, ?, ?);', [d], function (error0, results0, fields) {
+//                 if (error0) console.log(error0);
+//                 connection.query('SELECT * FROM att_categories;', function (error1, results1, fields) {
+//                     if (error1) console.log(error1);
+//                     // console.log(results1);
+//                     // connection.end();
+//                     res.render('index', {cities: results0, categories: results1});
+//                 });
+//             });
+//         }
+//
+//     });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
 
 let coef_price_Tickets = [];
 for(let i = 0; i <= 4 ; i++){
@@ -28,7 +82,6 @@ router.get('/', function(req, res, next) {
     });
 });
 const nodemailer = require('nodemailer');
-const fs = require('fs');
 
 let smtpConfig = {
     host: 'smtp.gmail.com',

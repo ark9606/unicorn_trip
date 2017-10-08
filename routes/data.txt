@@ -1,0 +1,108 @@
+﻿GRU:Sao Paulo
+MEX:Mexico
+BCN:Barcelona
+AYT:Antalya
+ARN:Stockholm
+IST:Istanbul
+CAN:Guangzhou
+BWI:Baltimore
+BKK:Bangkok
+MAD:Madrid
+TXL:Berlin
+IAN:Kiana
+BNE:Brisbane
+PEK:Beijing
+SIN:Singapore
+CDG:Paris
+CLT:Charlotte
+BOM:Mumbai
+TPE:Taipei
+MDW:Chicago
+ORD:Chicago
+CVG:Covington
+CLE:Cleveland
+CPH:Copenhagen
+DFW:Dallas
+DEN:Denver
+DTW:Detroit
+DME:Moscow
+DXB:Dubai
+DUB:Dublin
+ATH:Athena
+FLL:Fort Lauderdale
+OSL:Oslo
+BOS:Boston
+GMP:Seoul
+HND:Tokyo
+ATL:Atlanta
+LHR:London
+HKG:Hong Kong
+SHA:Shanghai
+HNL:Honolulu
+SZX:Shenzhen
+ICN:Seoul
+DEL:Delhi
+ITM:Osaka
+FUK:Fukuoka
+JNB:Johannesburg
+CJU:Keku
+JFK:New York
+KIX:Osaka
+JED:Jeddah
+SYD:Sydney
+KUL:Kuala Lumpur
+LGA:New York
+STL:St Louis
+FCO:Rome
+YYZ:Toronto
+LAX:Los Angeles
+MXP:Milan
+LAS:Las Vegas
+MEM:Memphis
+OAK:Auckland
+MIA:Miami
+MSP:Minneapolis
+MUC:Munich
+OKA:Okinawa
+BRU:Brussels
+CTS:Sapporo
+NRT:Tokyo
+EWR:Newark
+MNL:Manila
+MCO:Orlando
+ORY:Paris
+AGP:Malaga
+PHL:Philadelphia
+PHX:Phoenix
+PDX:Portland
+PVG:Shanghai
+FRA:Frankfurt
+DUS:Düsseldorf
+MAN:Manchester
+DCA:Washington
+SLC:Salt Lake City
+SAN:San Diego
+SFO:San Francisco
+AMS:Amsterdam
+VIE:Wien
+SEA:Seattle
+MOW:Moscow
+CTU:Chengdu
+CGK:Jakarta
+PMI:Palma de Mallorca
+STN:London
+TPA:Tampa
+MEL:Melbourne
+YVR:Vancouver
+IAD:Washington
+ZRH:Zurich
+IEV:Kiev
+LWO:Lviv
+MCM:Monaco
+DNK:Dnipro
+WAW:Warszawa
+HRK:Krakow
+PRG:Praha
+VDD:Wien
+BRQ:Brno
+JBP:LA
