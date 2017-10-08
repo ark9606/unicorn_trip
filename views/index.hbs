@@ -16,7 +16,7 @@
     let cities = [];
 </script>
 <main>
-    <header>Unicorn</header>
+    <header>Unicorn Trip</header>
     <form action="/process" method="post" id="startTHIS">
         <label>
 
@@ -61,8 +61,7 @@
             <!--</select>-->
         </label>
         <label for="">
-            <p>Date</p>
-            <input type="date" name="date" required min="function(this){return new Date().toLocaleDateString().split('.').reverse().join('-')}">
+            <input type="date" placeholder="Date" name="date" required min="function(this){return new Date().toLocaleDateString().split('.').reverse().join('-')}">
         </label>
         <input type="submit" value="Choose">
     </form>
