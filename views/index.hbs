@@ -150,7 +150,7 @@
 <script>
 $(function () {
     let curr = {tick_to: 0, tick_back:0, room: 0};
-
+    let totPrice = 0;
     $('form#attrForm').submit(function (e) {
         e.preventDefault();
         let attrs = $('form#attrForm input:checked').map(function (e) {
@@ -160,17 +160,19 @@ $(function () {
         let tickets_to = obj.tickets_to[curr.tick_to].id;
         let tickets_from = obj.tickets_back[curr.tick_back].id;
         let hostel = obj.rooms[curr.room].id;
-        window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel + '&cf='+ cityFrom + '&ct=' + cityTo;
-        $.ajax({
-            url: "/accept",
-            method: "GET",
-            cache: false,
-            data: {
-                attrs, tickets_to,tickets_from,hostel
-            },
-            success: function (data) {
-            }
-        });
+        alert(name_city_from);
+        alert(name_city_to);
+        window.location.href = '/accept?attrs=' + attrs + '&tickets_to='+ tickets_to + '&tickets_from=' + tickets_from + '&hostel='+hostel + '&cf='+ name_city_from + '&ct=' + name_city_to + '&tp=' + totPrice;
+//        $.ajax({
+//            url: "/accept",
+//            method: "GET",
+//            cache: false,
+//            data: {
+//                attrs, tickets_to,tickets_from,hostel
+//            },
+//            success: function (data) {
+//            }
+//        });
 
 //        let attrs = $('form#attrForm input:checked').map(function (e) {
 //            return $(this).attr('value');
@@ -182,7 +184,7 @@ $(function () {
     let days = 1;
     let obj = null;
 
-    let cityFrom = '', cityTo = '';
+    let name_city_from =  '', name_city_to = '';
     $('form#startTHIS').submit(function (e) {
         e.preventDefault();
         let from = document.getElementById('startTHIS');
@@ -190,8 +192,8 @@ $(function () {
         cityFrom = from.cityFrom.value ;
         cityTo = from.cityTo.value ;
         days = from.days.value ;
-        let name_city_from = from.cityFrom.options[from.cityFrom.selectedIndex ].text;
-        let name_city_to = from.cityTo.options[from.cityTo.selectedIndex ].text;
+        name_city_from = from.cityFrom.options[from.cityFrom.selectedIndex ].text;
+        name_city_to = from.cityTo.options[from.cityTo.selectedIndex ].text;
 
         let attr = [];
         $('form#startTHIS div#attr input:checked').each(function() {
@@ -278,7 +280,7 @@ $(function () {
                                 <div class="image-cont"><div class="image"></div><div class="price" class="hostel_price" data-price=${obj.rooms[i].price}>${obj.rooms[i].price}$</div></div>
                                 <div class="info-cont">
                                     <span class="name">${obj.rooms[i].name}</span>
-                                    <span class="mark">оценка посетителей ${obj.rooms[i].marks}</span>
+                                    <span class="mark">Mark ${obj.rooms[i].marks}</span>
                                     <span class="address">${obj.rooms[i].address}</span>
 
                                 </div>
@@ -371,7 +373,8 @@ $(function () {
 //            });
         }
 //        alert(attrs_price);
-        return tickets_to_price + tickets_from_price + hostel_price + attrs_price;
+        totPrice = tickets_to_price + tickets_from_price + hostel_price + attrs_price;
+        return totPrice;
     }
 
 })

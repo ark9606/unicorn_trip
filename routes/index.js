@@ -59,10 +59,11 @@ router.post('/confirm', function(req, res, next) {
                     fs.readFile('views/book_letter2.html',{encoding: 'utf8'}, function (err, data) {
                         if(err){console.error(err); return;}
 
-                        data = data.replace("@@ticket_to", 'from ' + req.session.data.cf + ', to ' + req.session.data.cf + ' at ' + ticket_to[0].datetime + ' during ' + ticket_to[0].duration + ', price is '+ ticket_to[0].price + '$')
-                            .replace("@@user", fio)/*
-                            .replace("@@date", req.session.sesInfo.dateTime)
-                            .replace("@@hall", req.session.sesInfo.hallName)*/;
+                        data = data.replace("@@ticket_to", 'from ' + req.session.data.cf + ', to ' + req.session.data.ct + ' at ' + ('' + ticket_to[0].datetime).substr(0, ('' +ticket_to[0].datetime).indexOf("GMT") ) + ' during ' + ticket_to[0].duration + ', price is '+ ticket_to[0].price + '$')
+                            .replace("@@user", fio)
+                            .replace("@@ticket_back", 'from ' + req.session.data.ct + ', to ' + req.session.data.cf + ', ' + ('' + ticket_back[0].datetime).substr(0, ('' +ticket_back[0].datetime).indexOf("GMT") ) + ' during ' + ticket_back[0].duration + ', price is '+ ticket_back[0].price + '$')
+                            .replace("@@hostel", 'Hotel ' + room[0].name + ', address ' + room[0].address  + ' guest rating is ' + room[0].mark + ', price for room is ' +  room[0].price + '$')
+                            .replace("@@totPrice", req.session.data.tp);
                         // console.log(data);
                         let mailOptions = {
                             from: '"Unicorn Trip"<theCinemaPortal@gmail.com>',
@@ -128,9 +129,12 @@ router.get('/accept', function(req, res, next) {
     let hostel = req.param('hostel');
     let cf = req.param('cf');
     let ct = req.param('ct');
+    let tp = req.param('tp');
+    // console.log(re)
     req.session.data = {
-        attrs, tickets_to, tickets_from, hostel, cf,ct
+        attrs, tickets_to, tickets_from, hostel, cf,ct,tp
     };
+    console.log(req.session.data);
     res.render('accept');
 });
 router.post('/process', function(req, res, next) {
